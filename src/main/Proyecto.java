@@ -1,18 +1,29 @@
-package jaxb;
+package main;
+
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement
 public class Proyecto {
 	//Atributos
+	@XmlAttribute
 	private int codProyecto;
+	@XmlElement
 	private String nombre;
+	@XmlElement
 	private String lineaAccion;
+	@XmlElement
 	private String subLinea;
+	@XmlElement
 	private String pais;
+	@XmlElement
 	private String localizacion;
+	@XmlElement
 	private String fechaInicio;
+	@XmlElement
 	private String fechaFin;
+	@XmlElement
 	private String acciones;
 	
 	//Cardinalidad
@@ -81,4 +92,3 @@ public class Proyecto {
 		sede.add(pSede);
 	}
 }
-

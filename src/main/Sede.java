@@ -1,4 +1,4 @@
-package clasesP5_AA2;
+package main;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;

@@ -1,19 +1,36 @@
-package Clases;
+package main;
 
+import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@XmlRootElement
 public class Persona {
 	//Atributos
+	@XmlAttribute 
 	private int personId;
+	@XmlElement 
 	private String userName;
+	@XmlElement 
 	private String pass;
-	private Bool role;
+	@XmlElement 
+	private boolean role;
+	@XmlElement 
 	private String name;
+	@XmlElement 
 	private String surname;
+	@XmlElement 
 	private String address;
+	@XmlElement 
 	private String phone;
+	@XmlElement 
 	private String email;
 	
+	//Cardinalidad
+	private ArrayList <Sede> sede;
+	
 	//Metodo constructor
-	private Persona (int pPersonId, String pUserName, String pPass, Bool pRole, String pName, 
+	public Persona (int pPersonId, String pUserName, String pPass, boolean pRole, String pName, 
 			String pSurname, String pAddress,String pPhone, String pEmail) {
 		this.personId = pPersonId;
 		this.userName = pUserName;
@@ -36,7 +53,7 @@ public class Persona {
 	public String getPass() {
 		return pass;
 	}
-	public Bool getRole() {
+	public boolean getRole() {
 		return role;
 	}
 	public String getName() {
@@ -55,8 +72,13 @@ public class Persona {
 		return email;
 	}
 	
+	//Metodos get listas
+	public List<Sede> getSede_Persona() {
+		return sede;
+	}
+	
 	//Metodos set
-	public void setPersonId (String personId) {
+	public void setPersonId (int personId) {
 		this.personId = personId;
 	}
 	public void setUserName (String userName) {
@@ -65,7 +87,7 @@ public class Persona {
 	public void setPass (String pass) {
 		this.pass = pass;
 	}
-	public void setRole (Bool role) {
+	public void setRole (boolean role) {
 		this.role = role;
 	}
 	public void setName (String name) {
@@ -82,5 +104,10 @@ public class Persona {
 	}
 	public void setEmail (String email) {
 		this.email = email;
+	}
+	
+	//Metodos add listas
+	public void addSede_Persona(Sede pSede) {
+		sede.add(pSede);
 	}
 }
