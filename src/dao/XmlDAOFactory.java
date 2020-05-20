@@ -4,13 +4,12 @@
  * and open the template in the editor.
  */
 package dao;
-import javax.xml.bind.JAXBException;
 /**
  *
  * @author suare
  */
 public class XmlDAOFactory extends DAOFactory {
-    public XmlPersonasDAO getXmlPersonasDAO() throws JAXBException {
+    public XmlPersonasDAO getXmlPersonasDAO() {
         return new XmlPersonasDAO();
     }
 }

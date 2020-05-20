@@ -7,35 +7,29 @@ import java.util.List;
 @XmlRootElement
 public class Persona {
 	//Atributos
-	@XmlAttribute 
 	private int personId;
-	@XmlElement 
-	private String userName;
-	@XmlElement 
-	private String pass;
-	@XmlElement 
-	private boolean role;
-	@XmlElement 
-	private String name;
-	@XmlElement 
-	private String surname;
-	@XmlElement 
+	private String userName; 
+	private String pass; 
+	private boolean admin; 
+	private String name; 
+	private String surname; 
 	private String address;
-	@XmlElement 
 	private String phone;
-	@XmlElement 
 	private String email;
 	
 	//Cardinalidad
 	private ArrayList <Sede> sede;
 	
 	//Metodo constructor
+	public Persona() {
+		
+	};
 	public Persona (int pPersonId, String pUserName, String pPass, boolean pRole, String pName, 
 			String pSurname, String pAddress,String pPhone, String pEmail) {
 		this.personId = pPersonId;
 		this.userName = pUserName;
 		this.pass = pPass;
-		this.role = pRole;
+		this.admin = pRole;
 		this.name = pName;
 		this.surname = pSurname;
 		this.address = pAddress;
@@ -53,8 +47,8 @@ public class Persona {
 	public String getPass() {
 		return pass;
 	}
-	public boolean getRole() {
-		return role;
+	public boolean getAdmin() {
+		return admin;
 	}
 	public String getName() {
 		return name;
@@ -87,8 +81,8 @@ public class Persona {
 	public void setPass (String pass) {
 		this.pass = pass;
 	}
-	public void setRole (boolean role) {
-		this.role = role;
+	public void setAdmin (boolean admin) {
+		this.admin = admin;
 	}
 	public void setName (String name) {
 		this.name = name;
@@ -109,5 +103,19 @@ public class Persona {
 	//Metodos add listas
 	public void addSede_Persona(Sede pSede) {
 		sede.add(pSede);
+	}
+	
+	@Override
+	public String toString() {
+		return String.format(
+				"Identificador: " + personId + 
+				". Nombre de usuario: " + userName +
+				". Contraseña: " + pass +
+				". Nombre: " + name +
+				". Apellidos: " + surname +
+				". Dirección: " + address +
+				". Teléfono: " + phone +
+				". Email: " + email + 
+				". Role: " + (admin ? "Administrador" : "Usuario"));
 	}
 }

@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package dao;
-import javax.xml.bind.JAXBException;
+
+import main.Persona;
 /**
  *
  * @author suare
@@ -13,7 +14,7 @@ public abstract class DAOFactory {
 	public static final int XML = 1;
 	public static final int MYSQL = 2;
  
-	public abstract XmlPersonasDAO getXmlPersonasDAO() throws JAXBException;
+	public abstract DAO<Persona> getXmlPersonasDAO();
  
 	public static DAOFactory getDAOFactory (int factoryType){
 		switch (factoryType) {
