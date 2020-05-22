@@ -4,12 +4,18 @@
  * and open the template in the editor.
  */
 package dao;
+
 /**
  *
  * @author suare
  */
 public class XmlDAOFactory extends DAOFactory {
-    public XmlPersonasDAO getXmlPersonasDAO() {
-        return new XmlPersonasDAO();
-    }
+	
+	public XmlPersonasDAO getXmlPersonasDAO() {
+		return new XmlPersonasDAO();
+	}
+
+	public XmlSedesDAO getXmlSedesDAO() {
+		return new XmlSedesDAO();
+	}
 }
