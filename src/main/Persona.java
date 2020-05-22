@@ -22,7 +22,7 @@ public class Persona {
 	
 	//Metodo constructor
 	public Persona() {
-	};
+	}
 	
 	public Persona (int pPersonId, String pUserName, String pPass, boolean admin, String pName, 
 			String pSurname, String pAddress,String pPhone, String pEmail) {

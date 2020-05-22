@@ -11,6 +11,7 @@ import javax.xml.bind.JAXBException;
 import dao.DAOFactory;
 import dao.DAO;
 import dao.XmlPersonasDAO;
+import dao.XmlSedesDAO;
 import dao.XmlVoluntariosDAO;
 
 
@@ -22,12 +23,14 @@ public class mainProgram {
 	private static DAOFactory xmlDAOFactory = DAOFactory.getDAOFactory(DAOFactory.XML);
 	private static DAO<Persona> personasDAO = (XmlPersonasDAO) xmlDAOFactory.getXmlPersonasDAO();
 	private static DAO<Voluntario> voluntariosDAO = (XmlVoluntariosDAO) xmlDAOFactory.getXmlVoluntariosDAO();
+	private static DAO<Sede> sedesDAO = (XmlSedesDAO) xmlDAOFactory.getXmlSedesDAO();
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		personasDAO.loadData();
+		sedesDAO.loadData();
 		boolean exitMenu = false;
 		while(!exitMenu) {
 			printMenu();
@@ -58,6 +61,18 @@ public class mainProgram {
 					System.out.println(voluntarios.get(i));
 				}
 				break;
+			case 5:
+				Sede sede = createSedeFromInput();
+				System.out.println(sede);
+				sedesDAO.add(sede);
+				sedesDAO.saveAll();
+				break;
+			case 6:
+				ArrayList<Sede> sedes = (ArrayList<Sede>) sedesDAO.list();
+				for(int i = 0; i < sedes.size(); i++) {
+					System.out.println(sedes.get(i));
+				}
+				break;
 			case 7:
 				exitMenu = true;
 				System.out.println("Hasta otra");
@@ -78,6 +93,8 @@ public class mainProgram {
 		System.out.println("2. Mostrar personas");
 		System.out.println("3. Crear un voluntario");
 		System.out.println("4. Mostrar voluntarios");
+		System.out.println("5. Crear una sede");
+		System.out.println("6. Mostrar sedes");
 		System.out.println("7. Salir");
 	}
 	
@@ -141,5 +158,42 @@ public class mainProgram {
 		voluntario.setAreaActividades(scanner.next());
 		
 		return voluntario;
+	}
+	
+	public static Sede createSedeFromInput() {
+		Scanner scanner = new Scanner(System.in);
+		Sede sede = new Sede();
+		
+		System.out.println("Identificador: ");
+		sede.setIdSede(scanner.nextInt());
+		
+		System.out.println("Ciudad: ");
+		sede.setCiudad(scanner.next());
+		
+		System.out.println("Dirección: ");
+		sede.setDireccion(scanner.next());
+		
+		System.out.println("Teléfono: ");
+		sede.setTelefono(scanner.next());
+		
+		System.out.println("Email: ");
+		sede.setEmail(scanner.next());
+		
+		System.out.println("¿Crear como central? S/N ");
+		String input = "";
+		while((!input.equals("S")) && (!input.equals("N"))) {
+			input = scanner.next();
+			switch(input) {
+			case "S":
+				sede.setCentral(true);
+				break;
+			case "N":
+				sede.setCentral(false);
+				break;
+			default: 
+				System.out.println("Escriba S/N");
+			}
+		}
+		return sede;
 	}
 }

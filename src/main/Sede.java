@@ -7,17 +7,11 @@ import java.util.List;
 @XmlRootElement
 public class Sede {
 	// Atributos
-	@XmlAttribute
 	private int idSede;
-	@XmlElement
 	private String ciudad;
-	@XmlElement
 	private String direccion;
-	@XmlElement
 	private String telefono;
-	@XmlElement
 	private String email;
-	@XmlElement
 	private boolean central;
 	
 	//Cardinalidad
@@ -26,6 +20,10 @@ public class Sede {
 	private ArrayList <Proyecto> proyecto;
 	
 	//Metodo constructor
+	public Sede() {
+		
+	}
+	
 	public Sede (int pIdSede, String pCiudad, String pDireccion, String pTelefono, String pEmail, boolean pCentral) {
 		this.idSede = pIdSede;
 		this.ciudad = pCiudad;
@@ -64,6 +62,12 @@ public class Sede {
 	}
 	
 	//Metodos set
+	public void setIdSede(int idSede) {
+		this.idSede = idSede;
+	}
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
 	public void setDireccion (String direccion) {
 		this.direccion = direccion;
 	}
@@ -85,4 +89,14 @@ public class Sede {
 		proyecto.add(pProyecto);
 	}
 	
+	@Override
+	public String toString() {
+		return String.format(
+				"Identificador: " + idSede + 
+				". Ciudad: " + ciudad +
+				". Dirección: " + direccion +
+				". Teléfono: " + telefono +
+				". Email: " + email + 
+				". Central: " + (central ? "Central" : "Delegación"));
+	}
 }
