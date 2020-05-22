@@ -6,6 +6,7 @@
 package dao;
 
 import main.Persona;
+import main.Voluntario;
 /**
  *
  * @author suare
@@ -15,6 +16,8 @@ public abstract class DAOFactory {
 	public static final int MYSQL = 2;
  
 	public abstract DAO<Persona> getXmlPersonasDAO();
+	
+	public abstract DAO<Voluntario> getXmlVoluntariosDAO();
  
 	public static DAOFactory getDAOFactory (int factoryType){
 		switch (factoryType) {

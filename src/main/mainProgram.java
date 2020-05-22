@@ -11,6 +11,7 @@ import javax.xml.bind.JAXBException;
 import dao.DAOFactory;
 import dao.DAO;
 import dao.XmlPersonasDAO;
+import dao.XmlVoluntariosDAO;
 
 
 /**
@@ -20,6 +21,7 @@ import dao.XmlPersonasDAO;
 public class mainProgram {
 	private static DAOFactory xmlDAOFactory = DAOFactory.getDAOFactory(DAOFactory.XML);
 	private static DAO<Persona> personasDAO = (XmlPersonasDAO) xmlDAOFactory.getXmlPersonasDAO();
+	private static DAO<Voluntario> voluntariosDAO = (XmlVoluntariosDAO) xmlDAOFactory.getXmlVoluntariosDAO();
 	
 	/**
 	 * @param args
@@ -44,7 +46,19 @@ public class mainProgram {
 					System.out.println(personas.get(i));
 				}
 				break;
-			case 3:
+			case 3: 
+				Voluntario voluntario = createVoluntarioFromInput();
+				System.out.println(voluntario);
+				voluntariosDAO.add(voluntario);
+				voluntariosDAO.saveAll();
+				break;
+			case 4:
+				ArrayList<Voluntario> voluntarios = (ArrayList<Voluntario>) voluntariosDAO.list();
+				for(int i = 0; i < voluntarios.size(); i++) {
+					System.out.println(voluntarios.get(i));
+				}
+				break;
+			case 7:
 				exitMenu = true;
 				System.out.println("Hasta otra");
 				break;
@@ -62,7 +76,9 @@ public class mainProgram {
 		System.out.println("Seleccione una opción:");
 		System.out.println("1. Crear una persona");
 		System.out.println("2. Mostrar personas");
-		System.out.println("3. Salir");
+		System.out.println("3. Crear un voluntario");
+		System.out.println("4. Mostrar voluntarios");
+		System.out.println("7. Salir");
 	}
 	
 	public static Persona createPersonaFromInput() {
@@ -109,5 +125,21 @@ public class mainProgram {
 			}
 		}
 		return persona;
+	}
+	
+	public static Voluntario createVoluntarioFromInput() {
+		Scanner scanner = new Scanner(System.in);
+		Voluntario voluntario = new Voluntario(createPersonaFromInput());
+		
+		System.out.println("Número de voluntario: ");
+		voluntario.setNumVoluntario(scanner.nextInt());
+		
+		System.out.println("Sede: ");
+		voluntario.setIdSede(scanner.nextInt());
+		
+		System.out.println("Área de actividad: ");
+		voluntario.setAreaActividades(scanner.next());
+		
+		return voluntario;
 	}
 }

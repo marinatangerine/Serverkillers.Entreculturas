@@ -12,4 +12,8 @@ public class XmlDAOFactory extends DAOFactory {
     public XmlPersonasDAO getXmlPersonasDAO() {
         return new XmlPersonasDAO();
     }
+    
+    public XmlVoluntariosDAO getXmlVoluntariosDAO() {
+        return new XmlVoluntariosDAO();
+    }
 }

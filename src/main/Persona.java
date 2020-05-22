@@ -22,14 +22,14 @@ public class Persona {
 	
 	//Metodo constructor
 	public Persona() {
-		
 	};
-	public Persona (int pPersonId, String pUserName, String pPass, boolean pRole, String pName, 
+	
+	public Persona (int pPersonId, String pUserName, String pPass, boolean admin, String pName, 
 			String pSurname, String pAddress,String pPhone, String pEmail) {
 		this.personId = pPersonId;
 		this.userName = pUserName;
 		this.pass = pPass;
-		this.admin = pRole;
+		this.admin = admin;
 		this.name = pName;
 		this.surname = pSurname;
 		this.address = pAddress;
