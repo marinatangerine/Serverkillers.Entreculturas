@@ -1,24 +1,51 @@
 package main;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-class VoluntarioTest {
+public class VoluntarioTest {
 
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
+		System.out.println("Before realizado");
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
+		System.out.println("After realizado");
 	}
 
 	@Test
-	void testSetAreaActividades() {
-		fail("Not yet implemented");
+	public void testSetAreaActividades() {
+		Voluntario voluntario = new Voluntario();
+		assertNotNull(voluntario);   
 	}
 
+	@Test 
+	public void testVoluntario() {
+		
+		int pPersonId = 1;
+		String pUserName = "J";
+		String pPass = "0000";
+		boolean bool = true;
+		String pName = "Juan";
+		String pAddress = "Barcelona, Spain";
+		String pPhone = "93 0000000";
+		int idVoluntario = 10;
+		int idSede = 150;
+		String areaActividades = "Talleres";
+		
+		Voluntario voluntario = new Voluntario(pPersonId, pUserName, pPass, bool, pName, pAddress, pPhone, areaActividades, areaActividades, idVoluntario, idSede, areaActividades);
+		assertNotNull(voluntario);   
+
+	}
+	@Test 
+	public void testsetAreaActividades() {
+		String areaActividades = "Actividades Deportivas";
+		assertNotNull(areaActividades);
+	}
+		
 }
