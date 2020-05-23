@@ -2,28 +2,13 @@ package main;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
+
 import org.junit.Test;
 
 public class VoluntarioTest {
 
-	@Before
-	public void setUp() throws Exception {
-		System.out.println("Before realizado");
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		System.out.println("After realizado");
-	}
-
-	@Test
-	public void testSetAreaActividades() {
-		Voluntario voluntario = new Voluntario();
-		assertNotNull(voluntario);   
-	}
-
+	//Test para comprobar si los parametros añadidos al constructor lo inicializan correctamente
+	
 	@Test 
 	public void testVoluntario() {
 		
@@ -41,11 +26,8 @@ public class VoluntarioTest {
 		Voluntario voluntario = new Voluntario(pPersonId, pUserName, pPass, bool, pName, pAddress, pPhone, areaActividades, areaActividades, idVoluntario, idSede, areaActividades);
 		assertNotNull(voluntario);   
 
-	}
-	@Test 
-	public void testsetAreaActividades() {
-		String areaActividades = "Actividades Deportivas";
-		assertNotNull(areaActividades);
-	}
 		
+	}
+	
+	
 }
