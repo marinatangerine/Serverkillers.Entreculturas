@@ -6,6 +6,7 @@
 package dao;
 
 import main.Persona;
+import main.Proyecto;
 import main.Voluntario;
 import main.Sede;
 /**
@@ -19,6 +20,7 @@ public abstract class DAOFactory {
 	public abstract DAO<Persona> getXmlPersonasDAO();
 	public abstract DAO<Sede> getXmlSedesDAO();
 	public abstract DAO<Voluntario> getXmlVoluntariosDAO();
+	public abstract DAO<Proyecto> getXmlProyectosDAO();
  
 	public static DAOFactory getDAOFactory (int factoryType){
 		switch (factoryType) {

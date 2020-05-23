@@ -6,16 +6,16 @@ package dao;
 import java.util.List;
 import java.util.Optional;
 
+import main.DuplicateEntityException;
+
 /**
  * @author suare
  *
  */
 public interface DAO<T> {
-	public void add(T t);
+	public void add(T t) throws DuplicateEntityException;
 	public void saveAll();
-    public Optional<T> get(String id); 
-    public void update(T t, String[] params);
-    public void remove(T t);
+    public T get(String id); 
     public List<T> list();
     public boolean loadData();
 

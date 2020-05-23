@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import main.DuplicateEntityException;
 import main.Voluntario;
 
 /**
@@ -56,21 +57,9 @@ public class XmlVoluntariosDAO implements DAO<Voluntario> {
 	}
 
 	@Override
-	public Optional<Voluntario> get(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(Voluntario t, String[] params) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void remove(Voluntario t) {
-		// TODO Auto-generated method stub
-		
+	public Voluntario get(String id) {
+		int voluntarioId = Integer.parseInt(id);
+		return voluntarios.stream().filter(voluntario -> voluntario.getPersonId() == voluntarioId).findFirst().orElse(null);
 	}
 
 	@Override
@@ -79,8 +68,11 @@ public class XmlVoluntariosDAO implements DAO<Voluntario> {
 	}
 
 	@Override
-	public void add(Voluntario t) {
-		voluntarios.add(t);
+	public void add(Voluntario t) throws DuplicateEntityException {
+		if(voluntarios.stream().filter(voluntario -> voluntario.getPersonId() == t.getPersonId()).findFirst().orElse(null) == null) {
+			voluntarios.add(t);
+		}
+		else throw new DuplicateEntityException();
 	}
 	
 	@Override

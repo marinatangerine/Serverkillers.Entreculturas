@@ -4,12 +4,12 @@
 package dao;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -21,75 +21,76 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import main.DuplicateEntityException;
-import main.Persona;
+import main.Proyecto;
 
 /**
  * @author suare
  *
  */
-@XmlRootElement(name = "personas")
+@XmlRootElement(name = "proyectos")
 @XmlAccessorType (XmlAccessType.FIELD)
-public class XmlPersonasDAO implements DAO<Persona> {
+
+public class XmlProyectosDAO implements DAO<Proyecto> {
+	   
+    @XmlElement(name = "proyecto")
+    public List<Proyecto> proyectos;
     
-    @XmlElement(name = "persona")
-    public List<Persona> personas;
-    
-    public XmlPersonasDAO() {
-    	this.personas = new ArrayList<Persona>();
+    public XmlProyectosDAO() {
+    	this.proyectos = new ArrayList<Proyecto>();
     }
 
 	@Override
 	public void saveAll() {
-	    String fileName = "Personas.xml";
+	    String fileName = "Proyectos.xml";
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(XmlPersonasDAO.class);
-			if(this.personas != null){
+			JAXBContext jaxbContext = JAXBContext.newInstance(XmlProyectosDAO.class);
+			if(this.proyectos != null){
 	            FileOutputStream file = new FileOutputStream(fileName, false);
 	            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 	            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 	            jaxbMarshaller.marshal(this, file); 
 	        }
 	        
-	        System.out.println("Personas guardadas");
+	        System.out.println("Proyectos guardados");
 		}catch(Exception e){
-            System.out.println("Error al guardar el fichero de personas: " + e.getMessage());
+            System.out.println("Error al guardar el fichero de proyectos: " + e.getMessage());
 		}
 	}
 
 	@Override
-	public Persona get(String id) {
-		int personId = Integer.parseInt(id);
-		return personas.stream().filter(persona -> persona.getPersonId() == personId).findFirst().orElse(null);
+	public Proyecto get(String id) {
+		int codProyecto = Integer.parseInt(id);
+		return proyectos.stream().filter(proyecto -> proyecto.getCodProyecto() == codProyecto).findFirst().orElse(null);
 	}
 
 	@Override
-	public List<Persona> list() {
-        return this.personas;
+	public List<Proyecto> list() {
+        return this.proyectos;
 	}
 
 	@Override
-	public void add(Persona t) throws DuplicateEntityException {
-		if(personas.stream().filter(persona -> persona.getPersonId() == t.getPersonId()).findFirst().orElse(null) == null) {
-			personas.add(t);
+	public void add(Proyecto t) throws DuplicateEntityException{
+		if(proyectos.stream().filter(proyecto -> proyecto.getCodProyecto() == t.getCodProyecto()).findFirst().orElse(null) == null) {
+			proyectos.add(t);
 		}
 		else throw new DuplicateEntityException();
 	}
 	
 	@Override
 	public boolean loadData() {
-		String fileName = "Personas.xml";
+		String fileName = "Proyectos.xml";
 		try{
 			JAXBContext jaxbContext = JAXBContext.newInstance(XmlPersonasDAO.class);
         	Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             InputStream inStream = new FileInputStream(fileName);
-            XmlPersonasDAO personasDAO = (XmlPersonasDAO) jaxbUnmarshaller.unmarshal(inStream);
-            this.personas = personasDAO.personas;
+            XmlProyectosDAO proyectosDAO = (XmlProyectosDAO) jaxbUnmarshaller.unmarshal(inStream);
+            this.proyectos = proyectosDAO.proyectos;
             return true;
         }catch(FileNotFoundException e){
-            //System.out.println("No hay personas guardadas");
+            //System.out.println("No hay proyectos guardados");
             return false;
         }catch(JAXBException e){
-            //System.out.println("Error al leer fichero de personas: " + e.getMessage());
+            //System.out.println("Error al leer fichero de proyectos: " + e.getMessage());
             return false;
         }
 	}
