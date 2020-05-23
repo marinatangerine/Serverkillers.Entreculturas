@@ -1,37 +1,33 @@
 package main;
 
 import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @XmlRootElement
 public class Proyecto {
 	//Atributos
-	@XmlAttribute
 	private int codProyecto;
-	@XmlElement
 	private String nombre;
-	@XmlElement
 	private String lineaAccion;
-	@XmlElement
 	private String subLinea;
-	@XmlElement
 	private String pais;
-	@XmlElement
 	private String localizacion;
-	@XmlElement
-	private String fechaInicio;
-	@XmlElement
-	private String fechaFin;
-	@XmlElement
+	private Date fechaInicio;
+	private Date fechaFin;
 	private String acciones;
 	
 	//Cardinalidad
-	private ArrayList <Sede> sede;
+	private int idSede;
 		
 	//Metodo constructor
+	public Proyecto () {
+		
+	}
+	
 	public Proyecto (int pCodProyecto, String pNombre, String pLineaAccion, String pSubLinea, String pPais, 
-			String pLocalizacion, String pFechaInicio,String pFechaFin, String pAcciones) {
+			String pLocalizacion, Date pFechaInicio,Date pFechaFin, String pAcciones) {
 		this.codProyecto = pCodProyecto;
 		this.nombre = pNombre;
 		this.lineaAccion = pLineaAccion;
@@ -62,33 +58,64 @@ public class Proyecto {
 	public String getLocalizacion() {
 		return localizacion;
 	}
-	public String getFechaInicio() {
+	public Date getFechaInicio() {
 		return fechaInicio;
 	}
-	public String getFechaFin() {
+	public Date getFechaFin() {
 		return fechaFin;
 	}
 	public String getAcciones() {
 		return acciones;
 	}
-	
-	//Metodos get listas
-	public List<Sede> getSede_Proyecto() {
-		return sede;
+	public int getIdSede() {
+		return idSede;
 	}
+	
 	//Metodos set
-	public void setFechaInicio (String fechaInicio) {
+	public void setCodProyecto (int codProyecto) {
+		this.codProyecto = codProyecto;
+	}
+	public void setNombre (String nombre) {
+		this.nombre = nombre;
+	}
+	public void setLineaAccion (String lineaAccion) {
+		this.lineaAccion = lineaAccion;
+	}
+	public void setSubLinea (String subLinea) {
+		this.subLinea = subLinea;
+	}
+	public void setPais (String pais) {
+		this.pais = pais;
+	}
+	public void setLocalizacion (String localizacion) {
+		this.localizacion = localizacion;
+	}
+	public void setFechaInicio (Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
-	public void setFechaFin (String fechaFin) {
+	public void setFechaFin (Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 	public void setAcciones (String acciones) {
 		this.acciones = acciones;
 	}
-	
-	//Metodos add listas
-	public void addSede_Proyecto(Sede pSede) {
-		sede.add(pSede);
+	public void setIdSede(int idSede) {
+		this.idSede = idSede;
 	}
+	
+	@Override
+	public String toString() {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		return String.format(
+				"Código de Proyecto: " + codProyecto + 
+				". Nombre: " + nombre +
+				". Linea de acción: " + lineaAccion +
+				". Sublinea de acción: " + subLinea +
+				". País: " + pais +
+				". Localización: " + localizacion +
+				". Fecha de inicio: " + formatter.format(fechaInicio) +
+				". Fecha de fin: " + formatter.format(fechaFin) + 
+				". Acciones: " + acciones +
+				". Identificador de Sede: " + idSede);
+	}	
 }

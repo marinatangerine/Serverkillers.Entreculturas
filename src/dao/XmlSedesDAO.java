@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import main.DuplicateEntityException;
 import main.Sede;
 
 @XmlRootElement(name = "sedes")
@@ -31,9 +32,11 @@ public class XmlSedesDAO implements DAO<Sede> {
     }
 
 	@Override
-	public void add(Sede t) {
-		sedes.add(t);
-		
+	public void add(Sede t) throws DuplicateEntityException {
+		if(sedes.stream().filter(sede -> sede.getIdSede() == t.getIdSede()).findFirst().orElse(null) == null) {
+			sedes.add(t);
+		}
+		else throw new DuplicateEntityException();
 	}
 
 	@Override
@@ -56,21 +59,9 @@ public class XmlSedesDAO implements DAO<Sede> {
 	}
 
 	@Override
-	public Optional<Sede> get(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(Sede t, String[] params) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void remove(Sede t) {
-		// TODO Auto-generated method stub
-		
+	public Sede get(String id) {
+		int sedeId = Integer.parseInt(id);
+		return sedes.stream().filter(sede -> sede.getIdSede() == sedeId).findFirst().orElse(null);
 	}
 
 	@Override

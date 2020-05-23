@@ -18,7 +18,7 @@ public class Persona {
 	private String email;
 	
 	//Cardinalidad
-	private ArrayList <Sede> sede;
+	private int idSede;
 	
 	//Metodo constructor
 	public Persona() {
@@ -65,10 +65,8 @@ public class Persona {
 	public String getEmail() {
 		return email;
 	}
-	
-	//Metodos get listas
-	public List<Sede> getSede_Persona() {
-		return sede;
+	public int getIdSede() {
+		return idSede;
 	}
 	
 	//Metodos set
@@ -99,10 +97,8 @@ public class Persona {
 	public void setEmail (String email) {
 		this.email = email;
 	}
-	
-	//Metodos add listas
-	public void addSede_Persona(Sede pSede) {
-		sede.add(pSede);
+	public void setIdSede(int idSede) {
+		this.idSede = idSede;
 	}
 	
 	@Override
@@ -116,6 +112,7 @@ public class Persona {
 				". Dirección: " + address +
 				". Teléfono: " + phone +
 				". Email: " + email + 
-				". Role: " + (admin ? "Administrador" : "Usuario"));
-	}
+				". Role: " + (admin ? "Administrador" : "Usuario") +
+				". Identificador de Sede: " + idSede);
+	}	
 }

@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
-/**
- *
- * @author suare
+/*Devuelve el Xml DAO de cada entidad
+ * @return Xml DAO de cada entidad (Persona, Voluntario, Sede y Proyecto)
  */
 public class XmlDAOFactory extends DAOFactory {
 	
@@ -21,5 +15,9 @@ public class XmlDAOFactory extends DAOFactory {
 
 	public XmlSedesDAO getXmlSedesDAO() {
 		return new XmlSedesDAO();
+	}
+
+	public XmlProyectosDAO getXmlProyectosDAO() {
+		return new XmlProyectosDAO();
 	}
 }
