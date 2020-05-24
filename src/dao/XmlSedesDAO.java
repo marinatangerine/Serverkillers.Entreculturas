@@ -20,6 +20,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import main.DuplicateEntityException;
 import main.Sede;
 
+/** Carga los datos anteriores del Xml (para poder comprobar información de ellos y mostrarlo)
+* Lista los datos de las personas guardadas
+* Trata las excepciones definidas
+* @versión 1.0 23/05/2020
+* @author suare
+*
+*/
+
 @XmlRootElement(name = "sedes")
 @XmlAccessorType (XmlAccessType.FIELD)
 public class XmlSedesDAO implements DAO<Sede> {

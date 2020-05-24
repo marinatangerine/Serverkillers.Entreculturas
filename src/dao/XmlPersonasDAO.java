@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Optional;
 import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
@@ -23,8 +22,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import main.DuplicateEntityException;
 import main.Persona;
 
-/**
- * @author suare
+/**Define el contenido del XMl Personas
+ * Carga los datos anteriores del Xml (para poder comprobar información de ellos y mostrarlo)
+ * Lista los datos de las personas guardadas
+ * Trata las excepciones definidas
+ * @versión 1.0 23/05/2020
+ * @author Serverkillers
  *
  */
 @XmlRootElement(name = "personas")
@@ -32,7 +35,7 @@ import main.Persona;
 public class XmlPersonasDAO implements DAO<Persona> {
     
     @XmlElement(name = "persona")
-    public List<Persona> personas;
+    public List<Persona> personas; //Arraylist de Persona
     
     public XmlPersonasDAO() {
     	this.personas = new ArrayList<Persona>();

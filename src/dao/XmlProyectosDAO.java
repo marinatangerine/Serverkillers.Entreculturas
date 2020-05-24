@@ -23,10 +23,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import main.DuplicateEntityException;
 import main.Proyecto;
 
-/**
- * @author suare
- *
- */
+//* Carga los datos anteriores del Xml (para poder comprobar información de ellos y mostrarlo)
+* Lista los datos de las personas guardadas
+* Trata las excepciones definidas
+* @versión 1.0 23/05/2020
+* @author Serverkillers
+*
+*/
 @XmlRootElement(name = "proyectos")
 @XmlAccessorType (XmlAccessType.FIELD)
 

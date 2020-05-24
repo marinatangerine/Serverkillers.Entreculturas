@@ -9,9 +9,11 @@ import main.Persona;
 import main.Proyecto;
 import main.Voluntario;
 import main.Sede;
-/**
+/**Métodos que permite devuelve el DAO de cada una de las clases
+ * Se incluye (comentado) el caso para utilizar una base de datos relacional
+ * @versión 1.0 23/05/2020
+ * @author Serverkillers
  *
- * @author suare
  */
 public abstract class DAOFactory {
 	public static final int XML = 1;
