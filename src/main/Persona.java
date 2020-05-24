@@ -18,7 +18,9 @@ public class Persona {
 	private String email;
 	
 	//Cardinalidad
-	private int idSede;
+	private Sede sede;
+	
+	private int idSede = sede.getIdSede();
 	
 	//Metodo constructor
 	public Persona() {

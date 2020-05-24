@@ -19,7 +19,8 @@ public class Proyecto {
 	private String acciones;
 	
 	//Cardinalidad
-	private int idSede;
+	private Sede sede;	
+	private int idSede = sede.getIdSede();
 		
 	//Metodo constructor
 	public Proyecto () {
