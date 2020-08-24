@@ -167,7 +167,7 @@ public class mainProgram {
 		Scanner scanner = new Scanner(System.in);
 		Persona persona = new Persona();
 		
-		System.out.println("Identificador: ");
+		System.out.println("Identificador de persona: ");
 		persona.setPersonId(scanner.nextInt());
 		
 		System.out.println("Nombre de usuario: ");
@@ -175,15 +175,16 @@ public class mainProgram {
 		
 		System.out.println("Contraseña: ");
 		persona.setPass(scanner.next());
+		scanner.nextLine();
 		
 		System.out.println("Nombre: ");
-		persona.setName(scanner.next());
+		persona.setName(scanner.nextLine());
 		
 		System.out.println("Apellidos: ");
-		persona.setSurname(scanner.next());
+		persona.setSurname(scanner.nextLine());
 		
 		System.out.println("Dirección: ");
-		persona.setAddress(scanner.next());
+		persona.setAddress(scanner.nextLine());
 		
 		System.out.println("Teléfono: ");
 		persona.setPhone(scanner.next());
@@ -193,9 +194,9 @@ public class mainProgram {
 		
 		System.out.println("¿Crear como administrador? S/N ");
 		String input = "";
-		while((!input.equals("S")) && (!input.equalsIgnoreCase("N"))) {
+		while((!input.equalsIgnoreCase("S")) && (!input.equalsIgnoreCase("N"))) {
 			input = scanner.next();
-			switch(input) {
+			switch(input.toUpperCase()) {
 			case "S":
 				persona.setAdmin(true);
 				break;
@@ -224,11 +225,10 @@ public class mainProgram {
 		System.out.println("Número de voluntario: ");
 		voluntario.setNumVoluntario(scanner.nextInt());
 		
-		System.out.println("Sede: ");
-		voluntario.setIdSede(scanner.nextInt());
+		scanner.nextLine();
 		
 		System.out.println("Área de actividad: ");
-		voluntario.setAreaActividades(scanner.next());
+		voluntario.setAreaActividades(scanner.nextLine());
 		
 		return voluntario;
 	}
@@ -241,14 +241,15 @@ public class mainProgram {
 		Scanner scanner = new Scanner(System.in);
 		Sede sede = new Sede();
 		
-		System.out.println("Identificador: ");
+		System.out.println("Identificador de Sede: ");
 		sede.setIdSede(scanner.nextInt());
+		scanner.nextLine();
 		
 		System.out.println("Ciudad: ");
-		sede.setCiudad(scanner.next());
+		sede.setCiudad(scanner.nextLine());
 		
 		System.out.println("Dirección: ");
-		sede.setDireccion(scanner.next());
+		sede.setDireccion(scanner.nextLine());
 		
 		System.out.println("Teléfono: ");
 		sede.setTelefono(scanner.next());
@@ -258,9 +259,9 @@ public class mainProgram {
 		
 		System.out.println("¿Crear como central? S/N ");
 		String input = "";
-		while((!input.equals("S")) && (!input.equalsIgnoreCase("N"))) {
+		while((!input.equalsIgnoreCase("S")) && (!input.equalsIgnoreCase("N"))) {
 			input = scanner.next();
-			switch(input) {
+			switch(input.toUpperCase()) {
 			case "S":
 				sede.setCentral(true);
 				break;
@@ -282,20 +283,24 @@ public class mainProgram {
 		Scanner scanner = new Scanner(System.in);
 		Proyecto proyecto = new Proyecto();
 		
+		System.out.println("Código del Proyecto: ");
+		proyecto.setCodProyecto(scanner.nextInt());
+		scanner.nextLine();
+		
 		System.out.println("Nombre del Proyecto: ");
-		proyecto.setNombre(scanner.next());
+		proyecto.setNombre(scanner.nextLine());
 		
 		System.out.println("Línea de acción: ");
-		proyecto.setLineaAccion(scanner.next());
+		proyecto.setLineaAccion(scanner.nextLine());
 		
 		System.out.println("Sublínea de acción: ");
-		proyecto.setSubLinea(scanner.next());
+		proyecto.setSubLinea(scanner.nextLine());
 		
 		System.out.println("País: ");
-		proyecto.setPais(scanner.next());
+		proyecto.setPais(scanner.nextLine());
 		
 		System.out.println("Localización: ");
-		proyecto.setLocalizacion(scanner.next());
+		proyecto.setLocalizacion(scanner.nextLine());
 		
 		System.out.println("Fecha de inicio: ");
 		boolean dateOk = false;

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package dao;
 
 import java.io.FileInputStream;
@@ -23,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import main.DuplicateEntityException;
 import main.Proyecto;
 
-//* Carga los datos anteriores del Xml (para poder comprobar información de ellos y mostrarlo)
+/**Carga los datos anteriores del Xml (para poder comprobar información de ellos y mostrarlo)
 * Lista los datos de las personas guardadas
 * Trata las excepciones definidas
 * @versión 1.0 23/05/2020

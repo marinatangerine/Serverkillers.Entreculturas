@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sedes>
+    <sede>
+        <ciudad>Sevilla</ciudad>
+        <direccion>Calle Fundidores</direccion>
+        <email>sedesevilla@entreculturas.com</email>
+        <idSede>1</idSede>
+        <telefono>954897632</telefono>
+    </sede>
+    <sede>
+        <ciudad>Barcelona</ciudad>
+        <direccion>Calle Blai</direccion>
+        <email>sedentreculturas@entreculturas.com</email>
+        <idSede>2</idSede>
+        <telefono>936978411</telefono>
+    </sede>
+    <sede>
+        <ciudad>La Coruña</ciudad>
+        <direccion>Calle Miño</direccion>
+        <email>sedecoruna@entreculturas.com</email>
+        <idSede>3</idSede>
+        <telefono>981746320</telefono>
+    </sede>
+</sedes>

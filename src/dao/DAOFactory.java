@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import main.Persona;
 import main.Proyecto;
 import main.Voluntario;
 import main.Sede;
-/**Métodos que permite devuelve el DAO de cada una de las clases
+/**Métodos que devuelve el DAO de cada una de las clases
  * Se incluye (comentado) el caso para utilizar una base de datos relacional
  * @versión 1.0 23/05/2020
  * @author Serverkillers

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<personas>
+    <persona>
+        <address>Calle Andrade</address>
+        <admin>true</admin>
+        <email>martinezp@entreculturas.com</email>
+        <idSede>2</idSede>
+        <name>Pepe</name>
+        <pass>soypepe</pass>
+        <personId>1</personId>
+        <phone>655448899</phone>
+        <surname>Martínez Sánchez</surname>
+        <userName>martinezp</userName>
+    </persona>
+    <persona>
+        <address>Calle Grande</address>
+        <admin>true</admin>
+        <email>valsjose@entreculturas.com</email>
+        <idSede>2</idSede>
+        <name>Jose</name>
+        <pass>soyjose</pass>
+        <personId>4</personId>
+        <phone>611223344</phone>
+        <surname>Vals Vallecano</surname>
+        <userName>valsjose</userName>
+    </persona>
+</personas>

@@ -52,7 +52,7 @@ public class XmlVoluntariosDAO implements DAO<Voluntario> {
 	            jaxbMarshaller.marshal(this, file); 
 	        }
 	        
-	        System.out.println("Voluntarios guardadas");
+	        System.out.println("Voluntarios guardados");
 		}catch(Exception e){
             System.out.println("Error al guardar el fichero de voluntarios: " + e.getMessage());
 		}

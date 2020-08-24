@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<proyectos>
+    <proyecto>
+        <acciones>Educación</acciones>
+        <codProyecto>1</codProyecto>
+        <fechaFin>2021-06-21T00:00:00+02:00</fechaFin>
+        <fechaInicio>2020-09-15T00:00:00+02:00</fechaInicio>
+        <idSede>2</idSede>
+        <lineaAccion>Educación para adultos</lineaAccion>
+        <localizacion>Barcelona</localizacion>
+        <nombre>Aprendizaje para todos</nombre>
+        <pais>España</pais>
+        <subLinea>Educación</subLinea>
+    </proyecto>
+    <proyecto>
+        <acciones>Hábitos</acciones>
+        <codProyecto>2</codProyecto>
+        <fechaFin>2020-10-15T00:00:00+02:00</fechaFin>
+        <fechaInicio>2020-09-15T00:00:00+02:00</fechaInicio>
+        <idSede>3</idSede>
+        <lineaAccion>Alimentación y salud</lineaAccion>
+        <localizacion>La Coruña</localizacion>
+        <nombre>Come bien, vive feliz</nombre>
+        <pais>España</pais>
+        <subLinea>Salud</subLinea>
+    </proyecto>
+</proyectos>

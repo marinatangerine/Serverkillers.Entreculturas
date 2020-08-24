@@ -25,7 +25,7 @@ public class Persona {
 	}
 	
 	public Persona (int pPersonId, String pUserName, String pPass, boolean admin, String pName, 
-			String pSurname, String pAddress,String pPhone, String pEmail) {
+			String pSurname, String pAddress,String pPhone, String pEmail, int pIdSede) {
 		this.personId = pPersonId;
 		this.userName = pUserName;
 		this.pass = pPass;
@@ -35,6 +35,7 @@ public class Persona {
 		this.address = pAddress;
 		this.phone = pPhone;
 		this.email = pEmail;
+		this.idSede = pIdSede;
 	}
 	
 	//Metodos get
@@ -104,7 +105,7 @@ public class Persona {
 	@Override
 	public String toString() {
 		return String.format(
-				"Identificador: " + personId + 
+				"Identificador de persona: " + personId + 
 				". Nombre de usuario: " + userName +
 				". Contraseña: " + pass +
 				". Nombre: " + name +
@@ -113,6 +114,6 @@ public class Persona {
 				". Teléfono: " + phone +
 				". Email: " + email + 
 				". Role: " + (admin ? "Administrador" : "Usuario") +
-				". Identificador de Sede: " + idSede);
+				". Identificador de Sede: " + idSede + " ");
 	}	
 }

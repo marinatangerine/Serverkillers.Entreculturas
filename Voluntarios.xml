@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<voluntarios>
+    <voluntario>
+        <address>Calle Albañiles</address>
+        <admin>false</admin>
+        <email>luisaiz@gmail.com</email>
+        <idSede>1</idSede>
+        <name>Luisa</name>
+        <pass>soyluisa</pass>
+        <personId>2</personId>
+        <phone>688997755</phone>
+        <surname>Saiz Díaz</surname>
+        <userName>saizluisa</userName>
+        <areaActividades>Educación</areaActividades>
+        <numVoluntario>1</numVoluntario>
+    </voluntario>
+    <voluntario>
+        <address>Calle Larga</address>
+        <admin>false</admin>
+        <email>carlosloji@gmail.com</email>
+        <idSede>3</idSede>
+        <name>Carlos</name>
+        <pass>soycarlos</pass>
+        <personId>3</personId>
+        <phone>699774411</phone>
+        <surname>López Jiménez</surname>
+        <userName>lopezcarlos</userName>
+        <areaActividades>Salud</areaActividades>
+        <numVoluntario>2</numVoluntario>
+    </voluntario>
+</voluntarios>
