@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Optional;
 import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
@@ -23,10 +22,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import main.DuplicateEntityException;
 import main.Voluntario;
 
-/**
- * @author suare
- *
- */
+/** Carga los datos anteriores del Xml (para poder comprobar información de ellos y mostrarlo)
+* Lista los datos de las personas guardadas
+* Trata las excepciones definidas
+* @versión 1.0 23/05/2020
+* @author suare
+*
+*/
 @XmlRootElement(name = "voluntarios")
 @XmlAccessorType (XmlAccessType.FIELD)
 public class XmlVoluntariosDAO implements DAO<Voluntario> {

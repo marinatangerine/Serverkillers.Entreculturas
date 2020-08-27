@@ -48,7 +48,7 @@ public class mainProgram {
 						personasDAO.add(persona);
 						personasDAO.saveAll();
 					}
-					catch(DuplicateEntityException ex) {
+					catch(DuplicateEntityException ex) {//Con la excepción personalizada nos aseguramos que no existan personas duplicadas (mismo Id)
 						System.out.println(ex.getMessage());
 					}
 				}
@@ -74,7 +74,7 @@ public class mainProgram {
 						voluntariosDAO.add(voluntario);
 						voluntariosDAO.saveAll();
 					}
-					catch(DuplicateEntityException ex) {
+					catch(DuplicateEntityException ex) {//Excepción que indica que es necesario crear una sede previamente a la que asociar a una persona (mismo Id)
 						System.out.println(ex.getMessage());
 					}
 				}
@@ -85,8 +85,8 @@ public class mainProgram {
 				if(voluntarios.size() > 0) {
 					for(int i = 0; i < voluntarios.size(); i++) {
 						Voluntario v = voluntarios.get(i);
-						Sede s = sedesDAO.get(Integer.toString(v.getIdSede()));
-						String strSede = ". Ciudad Sede: " + s.getCiudad();
+						Sede s = sedesDAO.get(Integer.toString(v.getIdSede()));//Mostramos en el voluntario la sede a la que pertenece
+						String strSede = ". Ciudad Sede: " + s.getCiudad();//Mostramos también la ciudad a la que pertenece la sede
 						System.out.println(v + strSede);
 					}
 				}
@@ -99,7 +99,7 @@ public class mainProgram {
 					sedesDAO.add(sede);
 					sedesDAO.saveAll();
 				}
-				catch(DuplicateEntityException ex) {
+				catch(DuplicateEntityException ex) {//Utilizamos la excepción personalizada para que no existan sedes duplicadas (mismo Id)
 					System.out.println(ex.getMessage());
 				}
 				break;
@@ -114,7 +114,7 @@ public class mainProgram {
 						proyectosDAO.add(proyecto);
 						proyectosDAO.saveAll();
 					}
-					catch(DuplicateEntityException ex) {
+					catch(DuplicateEntityException ex) { //Con esta excepción nos aseguramos que no existan proyectos con el mismo identificador
 						System.out.println(ex.getMessage());
 					}
 				}
@@ -304,7 +304,7 @@ public class mainProgram {
 				proyecto.setFechaInicio(Utils.toDate(scanner.next()));
 				dateOk = true;
 			}
-			catch(DateFormatException ex) {
+			catch(DateFormatException ex) { //Excepción personalizada para introducir la fecha en el formato adecuado
 				System.out.println(ex.getMessage() + ". Vuelva a introducir la fecha.");
 			}
 		}
@@ -316,7 +316,7 @@ public class mainProgram {
 				proyecto.setFechaFin(Utils.toDate(scanner.next()));
 				dateOk = true;
 			}
-			catch(DateFormatException ex) {
+			catch(DateFormatException ex) { //Exceoción personalizada para introducir la fecha en el formato adecuado
 				System.out.println(ex.getMessage() + ". Vuelva a introducir la fecha.");
 			}
 		}
@@ -328,6 +328,10 @@ public class mainProgram {
 		return proyecto;
 	}
 	
+	/**
+	 * Lista las sedes guardadas
+	 * @param Arraylist de sedes
+	 */
 	public static void listSedes() {
 		ArrayList<Sede> sedes = (ArrayList<Sede>) sedesDAO.list();
 		if(sedes.size() > 0) {
@@ -338,6 +342,11 @@ public class mainProgram {
 		else System.out.println("No hay sedes guardadas");
 	}
 	
+	/**
+	 * Muestra las sedes guardadas con todos sus datos para que el usuario pueda seleccionar la sede deseada
+	 * @param método listSedes()
+	 * @return identificador de la sede
+	 */
 	public static int selectSede() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Seleccione una sede");

@@ -8,8 +8,9 @@ import java.util.Optional;
 
 import main.DuplicateEntityException;
 
-/**
- * @author suare
+/**Interfez que implementa los métodos de DAOFactory haciendo uso de Java Generics
+ * @versión 1.0 23/05/2020
+ * @author Serverkillers
  *
  */
 public interface DAO<T> {
