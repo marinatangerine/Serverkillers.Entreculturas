@@ -21,10 +21,10 @@ import dao.XmlVoluntariosDAO;
  */
 public class mainProgram {
 	private static DAOFactory xmlDAOFactory = DAOFactory.getDAOFactory(DAOFactory.XML);
-	private static DAO<Persona> personasDAO = (XmlPersonasDAO) xmlDAOFactory.getXmlPersonasDAO();
-	private static DAO<Voluntario> voluntariosDAO = (XmlVoluntariosDAO) xmlDAOFactory.getXmlVoluntariosDAO();
-	private static DAO<Sede> sedesDAO = (XmlSedesDAO) xmlDAOFactory.getXmlSedesDAO();
-	private static DAO<Proyecto> proyectosDAO = (XmlProyectosDAO) xmlDAOFactory.getXmlProyectosDAO();
+	private static DAO<Persona> personasDAO = (XmlPersonasDAO) xmlDAOFactory.getPersonasDAO();
+	private static DAO<Voluntario> voluntariosDAO = (XmlVoluntariosDAO) xmlDAOFactory.getVoluntariosDAO();
+	private static DAO<Sede> sedesDAO = (XmlSedesDAO) xmlDAOFactory.getSedesDAO();
+	private static DAO<Proyecto> proyectosDAO = (XmlProyectosDAO) xmlDAOFactory.getProyectosDAO();
 	
 	/**Método principal
 	 * @param args

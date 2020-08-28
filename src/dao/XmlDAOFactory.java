@@ -5,19 +5,19 @@ package dao;
  */
 public class XmlDAOFactory extends DAOFactory {
 	
-	public XmlPersonasDAO getXmlPersonasDAO() {
+	public XmlPersonasDAO getPersonasDAO() {
 		return new XmlPersonasDAO();
 	}
     
-    public XmlVoluntariosDAO getXmlVoluntariosDAO() {
+    public XmlVoluntariosDAO getVoluntariosDAO() {
         return new XmlVoluntariosDAO();
     }
 
-	public XmlSedesDAO getXmlSedesDAO() {
+	public XmlSedesDAO getSedesDAO() {
 		return new XmlSedesDAO();
 	}
 
-	public XmlProyectosDAO getXmlProyectosDAO() {
+	public XmlProyectosDAO getProyectosDAO() {
 		return new XmlProyectosDAO();
 	}
 }

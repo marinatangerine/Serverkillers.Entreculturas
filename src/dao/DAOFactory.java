@@ -14,17 +14,17 @@ public abstract class DAOFactory {
 	public static final int XML = 1;
 	public static final int MYSQL = 2;
  
-	public abstract DAO<Persona> getXmlPersonasDAO();
-	public abstract DAO<Sede> getXmlSedesDAO();
-	public abstract DAO<Voluntario> getXmlVoluntariosDAO();
-	public abstract DAO<Proyecto> getXmlProyectosDAO();
+	public abstract DAO<Persona> getPersonasDAO();
+	public abstract DAO<Sede> getSedesDAO();
+	public abstract DAO<Voluntario> getVoluntariosDAO();
+	public abstract DAO<Proyecto> getProyectosDAO();
  
 	public static DAOFactory getDAOFactory (int factoryType){
 		switch (factoryType) {
         	case XML:
         		return new XmlDAOFactory();
-            //case MYSQL:
-            //	return new MySqlDAOFactory();
+            case MYSQL:
+            	return new MySqlDAOFactory();
         	default:
         		return null;
 		}
