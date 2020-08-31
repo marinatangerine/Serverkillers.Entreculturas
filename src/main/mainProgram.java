@@ -5,10 +5,16 @@ import java.util.Scanner;
 
 import dao.DAOFactory;
 import dao.DAO;
+
 import dao.XmlPersonasDAO;
 import dao.XmlProyectosDAO;
 import dao.XmlSedesDAO;
 import dao.XmlVoluntariosDAO;
+
+import dao.MySqlPersonasDAO;
+import dao.MySqlProyectosDAO;
+import dao.MySqlSedesDAO;
+import dao.MySqlVoluntariosDAO;
 
 
 /**Programa principal que muestra varias opciones en un menú
@@ -21,19 +27,25 @@ import dao.XmlVoluntariosDAO;
  */
 public class mainProgram {
 	private static DAOFactory xmlDAOFactory = DAOFactory.getDAOFactory(DAOFactory.XML);
-	private static DAO<Persona> personasDAO = (XmlPersonasDAO) xmlDAOFactory.getPersonasDAO();
-	private static DAO<Voluntario> voluntariosDAO = (XmlVoluntariosDAO) xmlDAOFactory.getVoluntariosDAO();
-	private static DAO<Sede> sedesDAO = (XmlSedesDAO) xmlDAOFactory.getSedesDAO();
-	private static DAO<Proyecto> proyectosDAO = (XmlProyectosDAO) xmlDAOFactory.getProyectosDAO();
-	
+	private static DAOFactory MySqlDAOFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+	private static DAO<Persona> xmlpersonasDAO = (XmlPersonasDAO) xmlDAOFactory.getPersonasDAO();
+	private static DAO<Persona> mysqlpersonasDAO = (MySqlPersonasDAO) xmlDAOFactory.getPersonasDAO();
+	private static DAO<Voluntario> xmlvoluntariosDAO = (XmlVoluntariosDAO) xmlDAOFactory.getVoluntariosDAO();
+	private static DAO<Voluntario> mysqlvoluntariosDAO = (MySqlVoluntariosDAO) xmlDAOFactory.getVoluntariosDAO();
+	private static DAO<Sede> xmlsedesDAO = (XmlSedesDAO) xmlDAOFactory.getSedesDAO();
+	private static DAO<Sede> mysqlsedesDAO = (MySqlSedesDAO) xmlDAOFactory.getSedesDAO();
+	private static DAO<Proyecto> xmlproyectosDAO = (XmlProyectosDAO) xmlDAOFactory.getProyectosDAO();
+	private static DAO<Proyecto> mysqlproyectosDAO = (MySqlProyectosDAO) xmlDAOFactory.getProyectosDAO();
+
+
 	/**Método principal
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		//Carga los datos previos de personas, sedes y proyectos
-		personasDAO.loadData();
-		sedesDAO.loadData();
-		proyectosDAO.loadData();
+		xmlpersonasDAO.loadData();
+		xmlsedesDAO.loadData();
+		xmlproyectosDAO.loadData();
 		boolean exitMenu = false; //se inicializa la variable exitMenu para poder salir del flujo del programa cuando sea verdadera
 		while(!exitMenu) {
 			printMenu(); 
@@ -41,12 +53,12 @@ public class mainProgram {
 			int option = scanner.nextInt(); //se inicializa la variable option que se recoge por teclado
 			switch(option) {
 			case 1: //la opción 1 permite crear una nueva persona desde consola y guarda los datos en el Xml
-				if(sedesDAO.list().size() > 0) {
+				if(xmlsedesDAO.list().size() > 0) {
 					Persona persona = createPersonaFromInput();
 					System.out.println(persona);
 					try {
-						personasDAO.add(persona);
-						personasDAO.saveAll();
+						xmlpersonasDAO.add(persona);
+						xmlpersonasDAO.saveAll();
 					}
 					catch(DuplicateEntityException ex) {//Con la excepción personalizada nos aseguramos que no existan personas duplicadas (mismo Id)
 						System.out.println(ex.getMessage());
@@ -55,11 +67,11 @@ public class mainProgram {
 				else System.out.println("No hay sedes guardadas. Cree primero una sede para añadir una persona");
 				break;
 			case 2: //la opción 2 muestra los datos guardados en el Xml creado para personas
-				ArrayList<Persona> personas = (ArrayList<Persona>) personasDAO.list();
+				ArrayList<Persona> personas = (ArrayList<Persona>) xmlpersonasDAO.list();
 				if(personas.size() > 0) {
 					for(int i = 0; i < personas.size(); i++) {
 						Persona p = personas.get(i);
-						Sede s = sedesDAO.get(Integer.toString(p.getIdSede()));
+						Sede s = xmlsedesDAO.get(Integer.toString(p.getIdSede()));
 						String strSede = ". Ciudad Sede: " + s.getCiudad();
 						System.out.println(p + strSede);
 					}
@@ -67,12 +79,12 @@ public class mainProgram {
 				else System.out.println("No hay personas guardadas");
 				break;
 			case 3: //la opción 3 crea un nuevo voluntario desde consola y guarda los datos en el Xml
-				if(sedesDAO.list().size() > 0) {
+				if(xmlsedesDAO.list().size() > 0) {
 					Voluntario voluntario = createVoluntarioFromInput();
 					System.out.println(voluntario);
 					try {
-						voluntariosDAO.add(voluntario);
-						voluntariosDAO.saveAll();
+						xmlvoluntariosDAO.add(voluntario);
+						xmlvoluntariosDAO.saveAll();
 					}
 					catch(DuplicateEntityException ex) {//Excepción que indica que es necesario crear una sede previamente a la que asociar a una persona (mismo Id)
 						System.out.println(ex.getMessage());
@@ -81,11 +93,11 @@ public class mainProgram {
 				else System.out.println("No hay sedes guardadas. Cree primero una sede para añadir una persona");
 				break;
 			case 4: //la opción 4 muestra los datos guardados en el Xml creado para voluntarios
-				ArrayList<Voluntario> voluntarios = (ArrayList<Voluntario>) voluntariosDAO.list();
+				ArrayList<Voluntario> voluntarios = (ArrayList<Voluntario>) xmlvoluntariosDAO.list();
 				if(voluntarios.size() > 0) {
 					for(int i = 0; i < voluntarios.size(); i++) {
 						Voluntario v = voluntarios.get(i);
-						Sede s = sedesDAO.get(Integer.toString(v.getIdSede()));//Mostramos en el voluntario la sede a la que pertenece
+						Sede s = xmlsedesDAO.get(Integer.toString(v.getIdSede()));//Mostramos en el voluntario la sede a la que pertenece
 						String strSede = ". Ciudad Sede: " + s.getCiudad();//Mostramos también la ciudad a la que pertenece la sede
 						System.out.println(v + strSede);
 					}
@@ -96,8 +108,8 @@ public class mainProgram {
 				Sede sede = createSedeFromInput();
 				System.out.println(sede);
 				try {
-					sedesDAO.add(sede);
-					sedesDAO.saveAll();
+					xmlsedesDAO.add(sede);
+					xmlsedesDAO.saveAll();
 				}
 				catch(DuplicateEntityException ex) {//Utilizamos la excepción personalizada para que no existan sedes duplicadas (mismo Id)
 					System.out.println(ex.getMessage());
@@ -107,12 +119,12 @@ public class mainProgram {
 				listSedes();
 				break;
 			case 7: //la opción 7 crea un nuevo proyecto desde consola y guarda los datos en el Xml
-				if(sedesDAO.list().size() > 0) {
+				if(xmlsedesDAO.list().size() > 0) {
 					Proyecto proyecto = createProyectoFromInput();
 					System.out.println(proyecto);
 					try {
-						proyectosDAO.add(proyecto);
-						proyectosDAO.saveAll();
+						xmlproyectosDAO.add(proyecto);
+						xmlproyectosDAO.saveAll();
 					}
 					catch(DuplicateEntityException ex) { //Con esta excepción nos aseguramos que no existan proyectos con el mismo identificador
 						System.out.println(ex.getMessage());
@@ -121,11 +133,11 @@ public class mainProgram {
 				else System.out.println("No hay sedes guardadas. Cree primero una sede para añadir un proyecto");
 				break;
 			case 8: //la opción 8 muestra los datos guardados en el Xml creado para proyectos
-				ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>) proyectosDAO.list();
+				ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>) xmlproyectosDAO.list();
 				if(proyectos.size() > 0) {
 					for(int i = 0; i < proyectos.size(); i++) {
 						Proyecto p = proyectos.get(i);
-						Sede s = sedesDAO.get(Integer.toString(p.getIdSede()));
+						Sede s = xmlsedesDAO.get(Integer.toString(p.getIdSede()));
 						String strSede = ". Ciudad Sede: " + s.getCiudad();
 						System.out.println(p + strSede);
 					}
@@ -338,7 +350,7 @@ public class mainProgram {
 	 * @param Arraylist de sedes
 	 */
 	public static void listSedes() {
-		ArrayList<Sede> sedes = (ArrayList<Sede>) sedesDAO.list();
+		ArrayList<Sede> sedes = (ArrayList<Sede>) xmlsedesDAO.list();
 		if(sedes.size() > 0) {
 			for(int i = 0; i < sedes.size(); i++) {
 				System.out.println(sedes.get(i));
@@ -360,7 +372,7 @@ public class mainProgram {
 		boolean sedeOk = false;
 		while(!sedeOk) {
 			idSede = scanner.nextInt();
-			Sede sede = sedesDAO.get(Integer.toString(idSede));
+			Sede sede = xmlsedesDAO.get(Integer.toString(idSede));
 			if(sede != null) {
 				sedeOk = true;
 			}
