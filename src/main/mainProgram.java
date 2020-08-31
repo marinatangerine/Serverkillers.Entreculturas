@@ -29,13 +29,13 @@ public class mainProgram {
 	private static DAOFactory xmlDAOFactory = DAOFactory.getDAOFactory(DAOFactory.XML);
 	private static DAOFactory MySqlDAOFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 	private static DAO<Persona> xmlpersonasDAO = (XmlPersonasDAO) xmlDAOFactory.getPersonasDAO();
-	private static DAO<Persona> mysqlpersonasDAO = (MySqlPersonasDAO) xmlDAOFactory.getPersonasDAO();
+	private static DAO<Persona> mysqlpersonasDAO = (MySqlPersonasDAO) MySqlDAOFactory.getPersonasDAO();
 	private static DAO<Voluntario> xmlvoluntariosDAO = (XmlVoluntariosDAO) xmlDAOFactory.getVoluntariosDAO();
-	private static DAO<Voluntario> mysqlvoluntariosDAO = (MySqlVoluntariosDAO) xmlDAOFactory.getVoluntariosDAO();
+	private static DAO<Voluntario> mysqlvoluntariosDAO = (MySqlVoluntariosDAO) MySqlDAOFactory.getVoluntariosDAO();
 	private static DAO<Sede> xmlsedesDAO = (XmlSedesDAO) xmlDAOFactory.getSedesDAO();
-	private static DAO<Sede> mysqlsedesDAO = (MySqlSedesDAO) xmlDAOFactory.getSedesDAO();
+	private static DAO<Sede> mysqlsedesDAO = (MySqlSedesDAO) MySqlDAOFactory.getSedesDAO();
 	private static DAO<Proyecto> xmlproyectosDAO = (XmlProyectosDAO) xmlDAOFactory.getProyectosDAO();
-	private static DAO<Proyecto> mysqlproyectosDAO = (MySqlProyectosDAO) xmlDAOFactory.getProyectosDAO();
+	private static DAO<Proyecto> mysqlproyectosDAO = (MySqlProyectosDAO) MySqlDAOFactory.getProyectosDAO();
 
 
 	/**Método principal
