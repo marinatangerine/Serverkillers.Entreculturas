@@ -1,9 +1,7 @@
--- drop database ONG;
-create database ONG;
+create database ong;
 
--- drop table sede;
 create table sede (
-idSede int not null,
+idSede int not null auto_increment,
 ciudad varchar(100),
 direccion varchar(255),
 telefono varchar(50),
@@ -14,7 +12,7 @@ primary key (idSede)
 
 -- drop table proyecto;
 create table proyecto (
-codProyecto int not null,
+codProyecto int not null auto_increment,
 nombre varchar(100),
 lineaAccion varchar(255),
 subLinea varchar(255),
@@ -30,7 +28,7 @@ primary key (codProyecto)
 
 -- drop table persona;
 create table persona (
-personId int not null,
+personId int not null auto_increment,
 userName varchar(50),
 pass varchar(10),
 administrator bool,
@@ -46,7 +44,7 @@ primary key (personId)
 
 -- drop table voluntario;
 create table voluntario (
-idVoluntario int not null,
+idVoluntario int not null auto_increment,
 areaActividades varchar(255),
 userName varchar(50),
 pass varchar(10),

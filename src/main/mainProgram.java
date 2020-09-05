@@ -43,9 +43,12 @@ public class mainProgram {
 	 */
 	public static void main(String[] args) {
 		//Carga los datos previos de personas, sedes y proyectos
-		xmlpersonasDAO.loadData();
 		xmlsedesDAO.loadData();
 		xmlproyectosDAO.loadData();
+		mysqlpersonasDAO.loadData();
+		//mysqlsedesDAO.loadData();
+		//mysqlproyectosDAO.loadData();
+		
 		boolean exitMenu = false; //se inicializa la variable exitMenu para poder salir del flujo del programa cuando sea verdadera
 		while(!exitMenu) {
 			printMenu(); 
@@ -57,8 +60,7 @@ public class mainProgram {
 					Persona persona = createPersonaFromInput();
 					System.out.println(persona);
 					try {
-						xmlpersonasDAO.add(persona);
-						xmlpersonasDAO.saveAll();
+						mysqlpersonasDAO.add(persona);
 					}
 					catch(DuplicateEntityException ex) {//Con la excepción personalizada nos aseguramos que no existan personas duplicadas (mismo Id)
 						System.out.println(ex.getMessage());
@@ -67,7 +69,7 @@ public class mainProgram {
 				else System.out.println("No hay sedes guardadas. Cree primero una sede para añadir una persona");
 				break;
 			case 2: //la opción 2 muestra los datos guardados en el Xml creado para personas
-				ArrayList<Persona> personas = (ArrayList<Persona>) xmlpersonasDAO.list();
+				ArrayList<Persona> personas = (ArrayList<Persona>) mysqlpersonasDAO.list();
 				if(personas.size() > 0) {
 					for(int i = 0; i < personas.size(); i++) {
 						Persona p = personas.get(i);
@@ -178,9 +180,6 @@ public class mainProgram {
 	public static Persona createPersonaFromInput() {
 		Scanner scanner = new Scanner(System.in);
 		Persona persona = new Persona();
-		
-		System.out.println("Identificador de persona: ");
-		persona.setPersonId(scanner.nextInt());
 		
 		System.out.println("Nombre de usuario: ");
 		persona.setUserName(scanner.next());
