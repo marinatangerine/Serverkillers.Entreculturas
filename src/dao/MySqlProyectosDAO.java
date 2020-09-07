@@ -1,54 +1,93 @@
 package dao;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import main.DatabaseUtil;
 import main.DuplicateEntityException;
 
 import main.Proyecto;
 
 public class MySqlProyectosDAO implements DAO<Proyecto>{
 
+	public List<Proyectos> proyectos; //Arraylist de Proyecto
+	
 	@Override
-	public void add(Proyecto t) throws DuplicateEntityException {
-		// TODO Auto-generated method stub
-		
+	public void add(Proyecto proyecto) throws DuplicateEntityException {
+		DatabaseUtil dbUtils = new DatabaseUtil();
+		Connection cn = dbUtils.connect();
+		String query = "insert into proyecto (nombre, lineaAccion, subLinea, pais, localizacion, fechaInicio, fechaFin, acciones, fk_sedeProyecto) values (?, ? , ?, ?, ?, ?, ?, ?, ?)";
+		try {
+			PreparedStatement st = cn.prepareStatement(query);
+			st.setString(1, proyecto.getNombre());
+			st.setString(2, proyecto.getLineaAccion());
+			st.setString(3, proyecto.getSubLinea());
+			st.setString(4, proyecto.getPais());
+			st.setString(5, proyecto.getLocalizacion());
+			st.setDate(6, proyecto.getFechaInicio());
+			st.setDate(7, proyecto.getFechaFin());
+			st.setString(8, proyecto.getAcciones());
+			st.setInt(9, proyecto.getIdSede());
+			
+			st.execute();
+			cn.close();
+		}
+		catch(SQLException e) {
+			System.out.print("Error al insertar los datos del proyecto: " + e.getMessage());
+		}
 	}
 
 	@Override
 	public void saveAll() {
-		// TODO Auto-generated method stub
+		// Not used in MySQL
 		
 	}
 
 	@Override
 	public Proyecto get(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		int codProyecto = Integer.parseInt(id);
+		return proyectos.stream().filler(proyecto -> proyecto.getCodProyecto() == codProyecto).findFirst().orElse(null);
 	}
 
 	@Override
 	public List<Proyecto> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.proyectos;
 	}
 
 	@Override
 	public boolean loadData() {
-		// TODO Auto-generated method stub
-		return false;
+		proyectos = new ArrayList<Proyecto>();
+		DatabaseUtil dbUtils = new DatabaseUtil();
+		Connection cn = dnUtils.connect();
+		try {
+			Statement st = cn.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM proyecto");
+			while (rs.next()) {
+				Proyecto proyecto =new Proyecto();
+				proyecto.setCodProyecto(rs.getInt("codProyecto"));
+				proyecto.setNombre(rs.getString("nombre"));
+				proyecto.setLineaAccion(rs.getString("lineaAccion"));
+				proyecto.setSubLinea(rs.getString("subLinea"));
+				proyecto.setPais(rs.getString("pais"));
+				proyecto.setLocalizacion(rs.getString("localizacion"));
+				proyecto.setFechaInicio(rs.getDate("fechaInicio"));
+				proyecto.setFechaFin(rs.getDate("fechaFin"));
+				proyecto.setAcciones(rs.setString("acciones"));
+				proyecto.setIdSede(rs.setString("fk_sedeProyecto"));
+				
+				proyectos.add(proyecto);
+			}
+			cn.close();
+			return true;
+		}
+		catch(SQLException e) {
+			System.out.print("Error al obtener los datos de proyectos: " + e.getMessage());
+			return false;
+		}
 	}
 
 }
