@@ -11,7 +11,7 @@ import main.DuplicateEntityException;
  *
  */
 public interface DAO<T> {
-	public void add(T t) throws DuplicateEntityException;
+	public int add(T t) throws DuplicateEntityException;
 	public void saveAll();
     public T get(String id); 
     public List<T> list();

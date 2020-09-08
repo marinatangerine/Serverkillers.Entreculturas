@@ -16,28 +16,37 @@ public class MySqlSedesDAO implements DAO<Sede> {
 	public List<Sede> sedes; //Arraylist de Sede
 
 	@Override
-	public void add(Sede sede) throws DuplicateEntityException {
+	public int add(Sede sede) throws DuplicateEntityException {
 		DatabaseUtil dbUtils = new DatabaseUtil();
 		Connection cn = dbUtils.connect();
-		String query = "insert into sede (ciudad, direccion, telefono, email) values (?, ?, ?, ?);"
+		String query = "call insertSede(?, ?, ?, ?, @id)";
+		int newId = -1;
 		try {
-			PreparedStatement st = cn.prepareStatement(query);
+			PreparedStatement st = cn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, sede.getCiudad());
 			st.setString(2, sede.getDireccion());
 			st.setString(3, sede.getTelefono());
 			st.setString(4, sede.getEmail());
 			
-			st.execute();
+			st.executeQuery();
+			Statement st1 = cn.createStatement();
+			ResultSet rs = st1.executeQuery("select @id");
+			if (rs.next()) {
+				newId = rs.getInt(1);
+			}
 			cn.close();
+			loadData();
+			return newId;
 		}
 		catch(SQLException e) {
 			System.out.print("Error al insertar los datos de la sede: " + e.getMessage());
+			return newId;
+		}
 	}
 
 	@Override
 	public void saveAll() {
-		// Not used in MySQL
-		
+		// No se utiliza con MYSQL		
 	}
 
 	@Override
@@ -58,7 +67,7 @@ public class MySqlSedesDAO implements DAO<Sede> {
 		Connection cn = dbUtils.connect();
 		try {
 			Statement st = cn.createStatement();
-			ResulSet rs = st.executeQuery("SELECT * FROM sede");
+			ResultSet rs = st.executeQuery("SELECT * FROM sede");
 			while (rs.next()) {
 				Sede sede = new Sede();
 				sede.setIdSede(rs.getInt("idSede"));
@@ -70,7 +79,7 @@ public class MySqlSedesDAO implements DAO<Sede> {
 				sedes.add(sede);
 			}
 			cn.close();
-			return true
+			return true;
 		}
 		catch(SQLException e) {
 			System.out.print("Error al obtener los datos de sedes: " + e.getMessage());

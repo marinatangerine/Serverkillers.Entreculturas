@@ -16,12 +16,13 @@ public class MySqlPersonasDAO implements DAO<Persona> {
 	public List<Persona> personas; //Arraylist de Persona
 
 	@Override
-	public void add(Persona persona) throws DuplicateEntityException {
+	public int add(Persona persona) throws DuplicateEntityException {
 		DatabaseUtil dbUtils = new DatabaseUtil();
 		Connection cn = dbUtils.connect();
-		String query = "insert into persona (userName, pass, administrator, namePersona, surname, address, phone, email, fk_sedePersona) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "call insertPersona(?, ?, ?, ?, ?, ?, ?, ?, ?, @id)";
+		int newId = -1;
 		try {
-			PreparedStatement st = cn.prepareStatement(query);
+			PreparedStatement st = cn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, persona.getUserName());
 			st.setString(2, persona.getPass());
 			st.setBoolean(3, persona.getAdmin());
@@ -32,18 +33,25 @@ public class MySqlPersonasDAO implements DAO<Persona> {
 			st.setString(8, persona.getEmail());
 			st.setInt(9, persona.getIdSede());
 			
-			st.execute();
+			st.executeQuery();
+			Statement st1 = cn.createStatement();
+			ResultSet rs = st1.executeQuery("select @id");
+			if (rs.next()) {
+			  newId = rs.getInt(1);
+			}
 			cn.close();
+			loadData();
+			return newId;
 		}
 		catch(SQLException e) {
 			System.out.print("Error al insertar los datos de la persona: " + e.getMessage());
+			return newId;
 		}
-		
 	}
 
 	@Override
 	public void saveAll() {
-		// Not used in MySQL
+		// No se utiliza con MySQL
 		
 	}
 

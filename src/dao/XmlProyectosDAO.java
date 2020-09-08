@@ -69,9 +69,10 @@ public class XmlProyectosDAO implements DAO<Proyecto> {
 	}
 
 	@Override
-	public void add(Proyecto t) throws DuplicateEntityException{
+	public int add(Proyecto t) throws DuplicateEntityException{
 		if(proyectos.stream().filter(proyecto -> proyecto.getCodProyecto() == t.getCodProyecto()).findFirst().orElse(null) == null) {
 			proyectos.add(t);
+			return t.getCodProyecto();
 		}
 		else throw new DuplicateEntityException();
 	}

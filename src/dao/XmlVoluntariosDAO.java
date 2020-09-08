@@ -70,9 +70,10 @@ public class XmlVoluntariosDAO implements DAO<Voluntario> {
 	}
 
 	@Override
-	public void add(Voluntario t) throws DuplicateEntityException {
+	public int add(Voluntario t) throws DuplicateEntityException {
 		if(voluntarios.stream().filter(voluntario -> voluntario.getPersonId() == t.getPersonId()).findFirst().orElse(null) == null) {
 			voluntarios.add(t);
+			return t.getPersonId();
 		}
 		else throw new DuplicateEntityException();
 	}

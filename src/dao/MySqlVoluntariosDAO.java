@@ -16,29 +16,31 @@ public class MySqlVoluntariosDAO implements DAO<Voluntario> {
 	public List<Voluntario> voluntarios; //Arraylist de Voluntario
 	
 	@Override
-	public void add(Voluntario voluntario) throws DuplicateEntityException {
+	public int add(Voluntario voluntario) throws DuplicateEntityException {
 		DatabaseUtil dbUtils = new DatabaseUtil();
 		Connection cn = dbUtils.connect();
-		String query = "insert into voluntario (areaActividades, userName, pass, administrator, namePersona, surname, address, phone, email, fk_sedeVoluntario, fk_personaVoluntario) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "call insertVoluntario(?, ?, @id)";
+		int newId = -1;
 		try {
-			PreparedStatement st = cn.prepareStatement(query);
+			PreparedStatement st = cn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, voluntario.getAreaActividades());
-			st.setString(2, voluntario.getUserName());
-			st.setString(3, voluntario.getPass());
-			st.setBoolean(4, voluntario.getAdmin());
-			st.setString(5, voluntario.getName());
-			st.setString(6, voluntario.getSurname());
-			st.setString(7, voluntario.getAddress());
-			st.setString(8, voluntario.getPhone());
-			st.setString(9, voluntario.getEmmail());
-			st.setInt(10, voluntario.getIdSede());
-			st.setInt(11, voluntario.getPersonId());
+			st.setInt(2, voluntario.getPersonId());
 			
-			st.execute();
+			st.executeQuery();
+			Statement st1 = cn.createStatement();
+			ResultSet rs = st1.executeQuery("select @id");
+			if (rs.next()) {
+				newId = rs.getInt(1);
+			}
 			cn.close();	
+			loadData();
+			return newId;
+			
 		}
 		catch(SQLException e) {
-		System.out.print("Error al insertar los datos del voluntario: " + e.getMessage());
+			System.out.print("Error al insertar los datos del voluntario: " + e.getMessage());
+			return newId;
+		}
 		
 	}
 
@@ -47,11 +49,30 @@ public class MySqlVoluntariosDAO implements DAO<Voluntario> {
 		// Not used in MySQL
 		
 	}
-
+	
 	@Override
 	public Voluntario get(String id) {
-		int numVoluntario = Integer.parseInt(id);
-		return voluntario.stream().filter(voluntario -> voluntario.getNumVomuntario == numVoluntario).findFirst().orElse(null);
+		int personId = Integer.parseInt(id);
+		Voluntario v = null;
+		DatabaseUtil dbUtils = new DatabaseUtil();
+		Connection cn = dbUtils.connect();
+		try {
+			String query = "SELECT * FROM voluntario WHERE personId = ?";
+			PreparedStatement st = cn.prepareStatement(query);
+			st.setInt(1, personId);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				v = new Voluntario();
+				v.setPersonId(rs.getInt("personId"));
+				v.setAreaActividades(rs.getString("areaActividades"));
+			}
+			cn.close();
+			return v;
+		}
+		catch(SQLException e) {
+			System.out.print("Error al obtener los datos de voluntarios: " + e.getMessage());
+			return v;
+		}
 	}
 
 	@Override
@@ -61,26 +82,16 @@ public class MySqlVoluntariosDAO implements DAO<Voluntario> {
 
 	@Override
 	public boolean loadData() {
-		voluntarios = new ArrayList<Voluntarios>();
+		voluntarios = new ArrayList<Voluntario>();
 		DatabaseUtil dbUtils = new DatabaseUtil();
 		Connection cn = dbUtils.connect();
 		try {
 			Statement st = cn.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM voluntario");
 			while (rs.next()) {
-				Voluntario volintario = new Volintario();
-				voluntario.setPersonId(rs.getInt("fk_personaVoluntario"));
-				voluntario.setUserName(rs.getString("userName"));
-				voluntario.setPass(rs.getString("pass"));
-				voluntario.setAdmin(rs.getBoolean("administrator"));
-				voluntario.setName(rs.getString("namePersona"));
-				voluntario.setSurname(rs.getNString("surname"));
-				voluntario.setAddress(rs.getString("address"));
-				voluntario.setPhone(rs.getString("phone"));
-				voluntario.setEmail(rs.getString("email"));
-				voluntario.setIdSede(rs.getInt("fk_sedeVoluntario"));
+				Voluntario voluntario = new Voluntario();
+				voluntario.setPersonId(rs.getInt("personId"));
 				voluntario.setAreaActividades(rs.getString("areaActividades"));
-				voluntario.setNumVoluntario(rs.getInt("idVoluntario"));
 				
 				voluntarios.add(voluntario);
 			}
@@ -90,6 +101,6 @@ public class MySqlVoluntariosDAO implements DAO<Voluntario> {
 		catch(SQLException e) {
 			System.out.print("Error al obtener los datos de voluntarios: " + e.getMessage());
 			return false;
-	}
-
-}
+		}
+	}		
+}		

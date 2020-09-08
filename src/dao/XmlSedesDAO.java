@@ -40,9 +40,10 @@ public class XmlSedesDAO implements DAO<Sede> {
     }
 
 	@Override
-	public void add(Sede t) throws DuplicateEntityException {
+	public int add(Sede t) throws DuplicateEntityException {
 		if(sedes.stream().filter(sede -> sede.getIdSede() == t.getIdSede()).findFirst().orElse(null) == null) {
 			sedes.add(t);
+			return t.getIdSede();
 		}
 		else throw new DuplicateEntityException();
 	}

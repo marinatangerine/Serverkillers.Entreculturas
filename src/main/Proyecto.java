@@ -3,7 +3,8 @@ package main;
 import javax.xml.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @XmlRootElement
 public class Proyecto {
@@ -14,8 +15,8 @@ public class Proyecto {
 	private String subLinea;
 	private String pais;
 	private String localizacion;
-	private Date fechaInicio;
-	private Date fechaFin;
+	private LocalDate fechaInicio;
+	private LocalDate fechaFin;
 	private String acciones;
 	
 	//Cardinalidad
@@ -27,7 +28,7 @@ public class Proyecto {
 	}
 	
 	public Proyecto (int pCodProyecto, String pNombre, String pLineaAccion, String pSubLinea, String pPais, 
-			String pLocalizacion, Date pFechaInicio,Date pFechaFin, String pAcciones) {
+			String pLocalizacion, LocalDate pFechaInicio,LocalDate pFechaFin, String pAcciones) {
 		this.codProyecto = pCodProyecto;
 		this.nombre = pNombre;
 		this.lineaAccion = pLineaAccion;
@@ -58,10 +59,10 @@ public class Proyecto {
 	public String getLocalizacion() {
 		return localizacion;
 	}
-	public Date getFechaInicio() {
+	public LocalDate getFechaInicio() {
 		return fechaInicio;
 	}
-	public Date getFechaFin() {
+	public LocalDate getFechaFin() {
 		return fechaFin;
 	}
 	public String getAcciones() {
@@ -90,10 +91,10 @@ public class Proyecto {
 	public void setLocalizacion (String localizacion) {
 		this.localizacion = localizacion;
 	}
-	public void setFechaInicio (Date fechaInicio) {
+	public void setFechaInicio (LocalDate fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
-	public void setFechaFin (Date fechaFin) {
+	public void setFechaFin (LocalDate fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 	public void setAcciones (String acciones) {
@@ -105,7 +106,7 @@ public class Proyecto {
 	
 	@Override
 	public String toString() {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		
 		return String.format(
 				"Código de Proyecto: " + codProyecto + 
 				". Nombre: " + nombre +
@@ -113,8 +114,8 @@ public class Proyecto {
 				". Sublinea de acción: " + subLinea +
 				". País: " + pais +
 				". Localización: " + localizacion +
-				". Fecha de inicio: " + formatter.format(fechaInicio) +
-				". Fecha de fin: " + formatter.format(fechaFin) + 
+				". Fecha de inicio: " + fechaInicio.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
+				". Fecha de fin: " + fechaFin.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + 
 				". Acciones: " + acciones +
 				". Identificador de Sede: " + idSede);
 	}	

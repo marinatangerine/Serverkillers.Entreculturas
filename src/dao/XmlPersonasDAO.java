@@ -71,9 +71,10 @@ public class XmlPersonasDAO implements DAO<Persona> {
 	}
 
 	@Override
-	public void add(Persona t) throws DuplicateEntityException {
+	public int add(Persona t) throws DuplicateEntityException {
 		if(personas.stream().filter(persona -> persona.getPersonId() == t.getPersonId()).findFirst().orElse(null) == null) {
 			personas.add(t);
+			return t.getPersonId();
 		}
 		else throw new DuplicateEntityException();
 	}

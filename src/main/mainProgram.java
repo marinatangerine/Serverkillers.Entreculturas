@@ -1,15 +1,13 @@
 package main;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import dao.DAOFactory;
 import dao.DAO;
-
-import dao.XmlPersonasDAO;
-import dao.XmlProyectosDAO;
-import dao.XmlSedesDAO;
-import dao.XmlVoluntariosDAO;
 
 import dao.MySqlPersonasDAO;
 import dao.MySqlProyectosDAO;
@@ -26,15 +24,10 @@ import dao.MySqlVoluntariosDAO;
  *
  */
 public class mainProgram {
-	private static DAOFactory xmlDAOFactory = DAOFactory.getDAOFactory(DAOFactory.XML);
 	private static DAOFactory MySqlDAOFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-	private static DAO<Persona> xmlpersonasDAO = (XmlPersonasDAO) xmlDAOFactory.getPersonasDAO();
 	private static DAO<Persona> mysqlpersonasDAO = (MySqlPersonasDAO) MySqlDAOFactory.getPersonasDAO();
-	private static DAO<Voluntario> xmlvoluntariosDAO = (XmlVoluntariosDAO) xmlDAOFactory.getVoluntariosDAO();
 	private static DAO<Voluntario> mysqlvoluntariosDAO = (MySqlVoluntariosDAO) MySqlDAOFactory.getVoluntariosDAO();
-	private static DAO<Sede> xmlsedesDAO = (XmlSedesDAO) xmlDAOFactory.getSedesDAO();
 	private static DAO<Sede> mysqlsedesDAO = (MySqlSedesDAO) MySqlDAOFactory.getSedesDAO();
-	private static DAO<Proyecto> xmlproyectosDAO = (XmlProyectosDAO) xmlDAOFactory.getProyectosDAO();
 	private static DAO<Proyecto> mysqlproyectosDAO = (MySqlProyectosDAO) MySqlDAOFactory.getProyectosDAO();
 
 
@@ -43,11 +36,9 @@ public class mainProgram {
 	 */
 	public static void main(String[] args) {
 		//Carga los datos previos de personas, sedes y proyectos
-		xmlsedesDAO.loadData();
-		xmlproyectosDAO.loadData();
 		mysqlpersonasDAO.loadData();
-		//mysqlsedesDAO.loadData();
-		//mysqlproyectosDAO.loadData();
+		mysqlsedesDAO.loadData();
+		mysqlproyectosDAO.loadData();
 		
 		boolean exitMenu = false; //se inicializa la variable exitMenu para poder salir del flujo del programa cuando sea verdadera
 		while(!exitMenu) {
@@ -55,12 +46,13 @@ public class mainProgram {
 			Scanner scanner = new Scanner(System.in);
 			int option = scanner.nextInt(); //se inicializa la variable option que se recoge por teclado
 			switch(option) {
-			case 1: //la opción 1 permite crear una nueva persona desde consola y guarda los datos en el Xml
-				if(xmlsedesDAO.list().size() > 0) {
+			case 1: //la opción 1 permite crear una nueva persona desde consola y guarda los datos en la tabla Persona de MySQL
+				if(mysqlsedesDAO.list().size() > 0) {
 					Persona persona = createPersonaFromInput();
-					System.out.println(persona);
 					try {
-						mysqlpersonasDAO.add(persona);
+						int personId = mysqlpersonasDAO.add(persona);
+						persona.setPersonId(personId);
+						System.out.println(persona);
 					}
 					catch(DuplicateEntityException ex) {//Con la excepción personalizada nos aseguramos que no existan personas duplicadas (mismo Id)
 						System.out.println(ex.getMessage());
@@ -68,25 +60,27 @@ public class mainProgram {
 				}
 				else System.out.println("No hay sedes guardadas. Cree primero una sede para añadir una persona");
 				break;
-			case 2: //la opción 2 muestra los datos guardados en el Xml creado para personas
+			case 2: //la opción 2 muestra los datos guardados en la tabla Persona de MySQL
 				ArrayList<Persona> personas = (ArrayList<Persona>) mysqlpersonasDAO.list();
 				if(personas.size() > 0) {
 					for(int i = 0; i < personas.size(); i++) {
 						Persona p = personas.get(i);
-						Sede s = xmlsedesDAO.get(Integer.toString(p.getIdSede()));
+						Sede s = mysqlsedesDAO.get(Integer.toString(p.getIdSede()));
 						String strSede = ". Ciudad Sede: " + s.getCiudad();
 						System.out.println(p + strSede);
 					}
 				}
 				else System.out.println("No hay personas guardadas");
 				break;
-			case 3: //la opción 3 crea un nuevo voluntario desde consola y guarda los datos en el Xml
-				if(xmlsedesDAO.list().size() > 0) {
+			case 3: //la opción 3 crea un nuevo voluntario desde consola y guarda los datos en la tabla Voluntario de MySQL
+				if(mysqlsedesDAO.list().size() > 0) {
 					Voluntario voluntario = createVoluntarioFromInput();
-					System.out.println(voluntario);
+					Persona persona = new Persona(0, voluntario.getUserName(), voluntario.getPass(), voluntario.getAdmin(), voluntario.getName(), voluntario.getSurname(), voluntario.getAddress(), voluntario.getPhone(), voluntario.getEmail(), voluntario.getIdSede());
 					try {
-						xmlvoluntariosDAO.add(voluntario);
-						xmlvoluntariosDAO.saveAll();
+						int personId = mysqlpersonasDAO.add(persona);
+						voluntario.setPersonId(personId);
+						mysqlvoluntariosDAO.add(voluntario);
+						System.out.println(voluntario);
 					}
 					catch(DuplicateEntityException ex) {//Excepción que indica que es necesario crear una sede previamente a la que asociar a una persona (mismo Id)
 						System.out.println(ex.getMessage());
@@ -94,39 +88,58 @@ public class mainProgram {
 				}
 				else System.out.println("No hay sedes guardadas. Cree primero una sede para añadir una persona");
 				break;
-			case 4: //la opción 4 muestra los datos guardados en el Xml creado para voluntarios
-				ArrayList<Voluntario> voluntarios = (ArrayList<Voluntario>) xmlvoluntariosDAO.list();
-				if(voluntarios.size() > 0) {
-					for(int i = 0; i < voluntarios.size(); i++) {
-						Voluntario v = voluntarios.get(i);
-						Sede s = xmlsedesDAO.get(Integer.toString(v.getIdSede()));//Mostramos en el voluntario la sede a la que pertenece
-						String strSede = ". Ciudad Sede: " + s.getCiudad();//Mostramos también la ciudad a la que pertenece la sede
-						System.out.println(v + strSede);
+			case 4: //la opción 4 muestra los datos guardados en la tabla Voluntario de MySQL
+				if (mysqlpersonasDAO.list().size() > 0) {
+					ArrayList<Persona> personasList = new ArrayList<Persona>(mysqlpersonasDAO.list());
+					int numVoluntarios = 0;
+					
+					for(int i = 0; i < personasList.size(); i++) {
+						Persona p = personasList.get(i);
+						Voluntario v = mysqlvoluntariosDAO.get(Integer.toString(p.getPersonId()));
+						if (v != null) {
+							numVoluntarios++;
+							v.setUserName(p.getUserName());
+							v.setPass(p.getPass());
+							v.setAdmin(p.getAdmin());
+							v.setName(p.getName());
+							v.setSurname(p.getSurname());
+							v.setAddress(p.getSurname());
+							v.setPhone(p.getPhone());
+							v.setEmail(p.getEmail());
+							v.setIdSede(p.getIdSede());
+							
+							Sede s = mysqlsedesDAO.get(Integer.toString(v.getIdSede()));//Mostramos en el voluntario la sede a la que pertenece
+							String strSede = ". Ciudad Sede: " + s.getCiudad();//Mostramos también la ciudad a la que pertenece la sede
+							System.out.println(v + strSede);
+						}
+					}
+					if (numVoluntarios == 0) {
+						System.out.println("No hay voluntarios guardados");
 					}
 				}
 				else System.out.println("No hay voluntarios guardados");
 				break;
-			case 5: //la opción 5 crea una nueva sede desde consola y guarda los datos en el Xml
+			case 5: //la opción 5 crea una nueva sede desde consola y guarda los datos en la tabla Sede de MySQL
 				Sede sede = createSedeFromInput();
-				System.out.println(sede);
 				try {
-					xmlsedesDAO.add(sede);
-					xmlsedesDAO.saveAll();
+					int id = mysqlsedesDAO.add(sede);
+					sede.setIdSede(id);
+					System.out.println(sede);
 				}
 				catch(DuplicateEntityException ex) {//Utilizamos la excepción personalizada para que no existan sedes duplicadas (mismo Id)
 					System.out.println(ex.getMessage());
 				}
 				break;
-			case 6: //la opción 6 muestra los datos guardados en el Xml creado para sedes
+			case 6: //la opción 6 muestra los datos guardados en la tabla Sede de MySQL
 				listSedes();
 				break;
-			case 7: //la opción 7 crea un nuevo proyecto desde consola y guarda los datos en el Xml
-				if(xmlsedesDAO.list().size() > 0) {
+			case 7: //la opción 7 crea un nuevo proyecto desde consola y guarda los datos en la tabla Proyecto de MySQL
+				if(mysqlsedesDAO.list().size() > 0) {
 					Proyecto proyecto = createProyectoFromInput();
-					System.out.println(proyecto);
 					try {
-						xmlproyectosDAO.add(proyecto);
-						xmlproyectosDAO.saveAll();
+						int id = mysqlproyectosDAO.add(proyecto);
+						proyecto.setCodProyecto(id);
+						System.out.println(proyecto);
 					}
 					catch(DuplicateEntityException ex) { //Con esta excepción nos aseguramos que no existan proyectos con el mismo identificador
 						System.out.println(ex.getMessage());
@@ -134,12 +147,12 @@ public class mainProgram {
 				}
 				else System.out.println("No hay sedes guardadas. Cree primero una sede para añadir un proyecto");
 				break;
-			case 8: //la opción 8 muestra los datos guardados en el Xml creado para proyectos
-				ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>) xmlproyectosDAO.list();
+			case 8: //la opción 8 muestra los datos guardados en la tabla Proyecto de MySQL
+				ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>) mysqlproyectosDAO.list();
 				if(proyectos.size() > 0) {
 					for(int i = 0; i < proyectos.size(); i++) {
 						Proyecto p = proyectos.get(i);
-						Sede s = xmlsedesDAO.get(Integer.toString(p.getIdSede()));
+						Sede s = mysqlsedesDAO.get(Integer.toString(p.getIdSede()));
 						String strSede = ". Ciudad Sede: " + s.getCiudad();
 						System.out.println(p + strSede);
 					}
@@ -154,8 +167,8 @@ public class mainProgram {
 				System.out.println("Introduce una opción válida");
 			}
 		}
-
 	}
+	
 	//menú mostrado 
 	public static void printMenu() {
 		System.out.println("-----------------------------");
@@ -233,13 +246,8 @@ public class mainProgram {
 		Scanner scanner = new Scanner(System.in);
 		Voluntario voluntario = new Voluntario(createPersonaFromInput());
 		
-		System.out.println("Número de voluntario: ");
-		voluntario.setNumVoluntario(scanner.nextInt());
-		
-		scanner.nextLine();
-		
 		System.out.println("Área de actividad: ");
-		voluntario.setAreaActividades(scanner.nextLine());
+		voluntario.setAreaActividades(scanner.next());
 		
 		return voluntario;
 	}
@@ -252,15 +260,11 @@ public class mainProgram {
 		Scanner scanner = new Scanner(System.in);
 		Sede sede = new Sede();
 		
-		System.out.println("Identificador de Sede: ");
-		sede.setIdSede(scanner.nextInt());
-		scanner.nextLine();
-		
 		System.out.println("Ciudad: ");
-		sede.setCiudad(scanner.nextLine());
+		sede.setCiudad(scanner.next());
 		
 		System.out.println("Dirección: ");
-		sede.setDireccion(scanner.nextLine());
+		sede.setDireccion(scanner.next());
 		
 		System.out.println("Teléfono: ");
 		sede.setTelefono(scanner.next());
@@ -294,33 +298,30 @@ public class mainProgram {
 		Scanner scanner = new Scanner(System.in);
 		Proyecto proyecto = new Proyecto();
 		
-		System.out.println("Código del Proyecto: ");
-		proyecto.setCodProyecto(scanner.nextInt());
-		scanner.nextLine();
-		
 		System.out.println("Nombre del Proyecto: ");
-		proyecto.setNombre(scanner.nextLine());
+		proyecto.setNombre(scanner.next());
 		
 		System.out.println("Línea de acción: ");
-		proyecto.setLineaAccion(scanner.nextLine());
+		proyecto.setLineaAccion(scanner.next());
 		
 		System.out.println("Sublínea de acción: ");
-		proyecto.setSubLinea(scanner.nextLine());
+		proyecto.setSubLinea(scanner.next());
 		
 		System.out.println("País: ");
-		proyecto.setPais(scanner.nextLine());
+		proyecto.setPais(scanner.next());
 		
 		System.out.println("Localización: ");
-		proyecto.setLocalizacion(scanner.nextLine());
+		proyecto.setLocalizacion(scanner.next());
 		
 		System.out.println("Fecha de inicio: ");
 		boolean dateOk = false;
 		while(!dateOk) {
 			try{
-				proyecto.setFechaInicio(Utils.toDate(scanner.next()));
+				DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				proyecto.setFechaInicio(LocalDate.parse(scanner.next(), dateFormat));
 				dateOk = true;
 			}
-			catch(DateFormatException ex) { //Excepción personalizada para introducir la fecha en el formato adecuado
+			catch(DateTimeParseException ex) { //Excepción personalizada para introducir la fecha en el formato adecuado
 				System.out.println(ex.getMessage() + ". Vuelva a introducir la fecha.");
 			}
 		}
@@ -329,10 +330,11 @@ public class mainProgram {
 		dateOk = false;
 		while(!dateOk) {
 			try{
-				proyecto.setFechaFin(Utils.toDate(scanner.next()));
+				DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				proyecto.setFechaFin(LocalDate.parse(scanner.next(), dateFormat));
 				dateOk = true;
 			}
-			catch(DateFormatException ex) { //Exceoción personalizada para introducir la fecha en el formato adecuado
+			catch(DateTimeParseException ex) { //Excepción personalizada para introducir la fecha en el formato adecuado
 				System.out.println(ex.getMessage() + ". Vuelva a introducir la fecha.");
 			}
 		}
@@ -349,7 +351,7 @@ public class mainProgram {
 	 * @param Arraylist de sedes
 	 */
 	public static void listSedes() {
-		ArrayList<Sede> sedes = (ArrayList<Sede>) xmlsedesDAO.list();
+		ArrayList<Sede> sedes = (ArrayList<Sede>) mysqlsedesDAO.list();
 		if(sedes.size() > 0) {
 			for(int i = 0; i < sedes.size(); i++) {
 				System.out.println(sedes.get(i));
@@ -371,7 +373,7 @@ public class mainProgram {
 		boolean sedeOk = false;
 		while(!sedeOk) {
 			idSede = scanner.nextInt();
-			Sede sede = xmlsedesDAO.get(Integer.toString(idSede));
+			Sede sede = mysqlsedesDAO.get(Integer.toString(idSede));
 			if(sede != null) {
 				sedeOk = true;
 			}

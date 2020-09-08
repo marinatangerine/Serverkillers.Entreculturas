@@ -19,11 +19,10 @@ public class VoluntarioTest {
 		String pName = "Juan";
 		String pAddress = "Barcelona, Spain";
 		String pPhone = "93 0000000";
-		int idVoluntario = 10;
 		int idSede = 150;
 		String areaActividades = "Talleres";
 		
-		Voluntario voluntario = new Voluntario(pPersonId, pUserName, pPass, bool, pName, pAddress, pPhone, areaActividades, areaActividades, idVoluntario, idSede, areaActividades);
+		Voluntario voluntario = new Voluntario(pPersonId, pUserName, pPass, bool, pName, pAddress, pPhone, areaActividades, areaActividades, idSede, areaActividades);
 		assertNotNull(voluntario);   
 
 		
