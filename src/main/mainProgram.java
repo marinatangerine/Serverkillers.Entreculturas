@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import dao.DAOFactory;
@@ -13,6 +14,10 @@ import dao.MySqlPersonasDAO;
 import dao.MySqlProyectosDAO;
 import dao.MySqlSedesDAO;
 import dao.MySqlVoluntariosDAO;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 
 /**Programa principal que muestra varias opciones en un menú
@@ -29,7 +34,8 @@ public class mainProgram {
 	private static DAO<Voluntario> mysqlvoluntariosDAO = (MySqlVoluntariosDAO) MySqlDAOFactory.getVoluntariosDAO();
 	private static DAO<Sede> mysqlsedesDAO = (MySqlSedesDAO) MySqlDAOFactory.getSedesDAO();
 	private static DAO<Proyecto> mysqlproyectosDAO = (MySqlProyectosDAO) MySqlDAOFactory.getProyectosDAO();
-
+	
+	
 
 	/**Método principal
 	 * @param args
@@ -39,6 +45,7 @@ public class mainProgram {
 		mysqlpersonasDAO.loadData();
 		mysqlsedesDAO.loadData();
 		mysqlproyectosDAO.loadData();
+		mysqlvoluntariosDAO.loadData();
 		
 		boolean exitMenu = false; //se inicializa la variable exitMenu para poder salir del flujo del programa cuando sea verdadera
 		while(!exitMenu) {
@@ -77,8 +84,8 @@ public class mainProgram {
 					Voluntario voluntario = createVoluntarioFromInput();
 					Persona persona = new Persona(0, voluntario.getUserName(), voluntario.getPass(), voluntario.getAdmin(), voluntario.getName(), voluntario.getSurname(), voluntario.getAddress(), voluntario.getPhone(), voluntario.getEmail(), voluntario.getIdSede());
 					try {
-						int personId = mysqlpersonasDAO.add(persona);
-						voluntario.setPersonId(personId);
+						//int personId = mysqlpersonasDAO.add(persona);
+						//voluntario.setPersonId(personId);
 						mysqlvoluntariosDAO.add(voluntario);
 						System.out.println(voluntario);
 					}
@@ -89,36 +96,45 @@ public class mainProgram {
 				else System.out.println("No hay sedes guardadas. Cree primero una sede para añadir una persona");
 				break;
 			case 4: //la opción 4 muestra los datos guardados en la tabla Voluntario de MySQL
-				if (mysqlpersonasDAO.list().size() > 0) {
-					ArrayList<Persona> personasList = new ArrayList<Persona>(mysqlpersonasDAO.list());
-					int numVoluntarios = 0;
-					
-					for(int i = 0; i < personasList.size(); i++) {
-						Persona p = personasList.get(i);
-						Voluntario v = mysqlvoluntariosDAO.get(Integer.toString(p.getPersonId()));
-						if (v != null) {
-							numVoluntarios++;
-							v.setUserName(p.getUserName());
-							v.setPass(p.getPass());
-							v.setAdmin(p.getAdmin());
-							v.setName(p.getName());
-							v.setSurname(p.getSurname());
-							v.setAddress(p.getSurname());
-							v.setPhone(p.getPhone());
-							v.setEmail(p.getEmail());
-							v.setIdSede(p.getIdSede());
-							
-							Sede s = mysqlsedesDAO.get(Integer.toString(v.getIdSede()));//Mostramos en el voluntario la sede a la que pertenece
-							String strSede = ". Ciudad Sede: " + s.getCiudad();//Mostramos también la ciudad a la que pertenece la sede
-							System.out.println(v + strSede);
-						}
-					}
-					if (numVoluntarios == 0) {
-						System.out.println("No hay voluntarios guardados");
+				ArrayList<Voluntario> voluntariosList = new ArrayList<Voluntario>(mysqlvoluntariosDAO.list());
+				if(voluntariosList.size() > 0) {
+					for(int i = 0; i < voluntariosList.size(); i++) {
+						Voluntario v = voluntariosList.get(i);
+						System.out.println(v);
 					}
 				}
-				else System.out.println("No hay voluntarios guardados");
+				else System.out.println("No hay voluntarios guardadas");
 				break;
+//				if (mysqlpersonasDAO.list().size() > 0) {
+//					ArrayList<Persona> personasList = new ArrayList<Persona>(mysqlpersonasDAO.list());
+//					int numVoluntarios = 0;
+//					
+//					for(int i = 0; i < personasList.size(); i++) {
+//						Persona p = personasList.get(i);
+//						Voluntario v = mysqlvoluntariosDAO.get(Integer.toString(p.getPersonId()));
+//						if (v != null) {
+//							numVoluntarios++;
+//							v.setUserName(p.getUserName());
+//							v.setPass(p.getPass());
+//							v.setAdmin(p.getAdmin());
+//							v.setName(p.getName());
+//							v.setSurname(p.getSurname());
+//							v.setAddress(p.getSurname());
+//							v.setPhone(p.getPhone());
+//							v.setEmail(p.getEmail());
+//							v.setIdSede(p.getIdSede());
+//							
+//							Sede s = mysqlsedesDAO.get(Integer.toString(v.getIdSede()));//Mostramos en el voluntario la sede a la que pertenece
+//							String strSede = ". Ciudad Sede: " + s.getCiudad();//Mostramos también la ciudad a la que pertenece la sede
+//							System.out.println(v + strSede);
+//						}
+//					}
+//					if (numVoluntarios == 0) {
+//						System.out.println("No hay voluntarios guardados");
+//					}
+//				}
+//				else System.out.println("No hay voluntarios guardados");
+//				break;
 			case 5: //la opción 5 crea una nueva sede desde consola y guarda los datos en la tabla Sede de MySQL
 				Sede sede = createSedeFromInput();
 				try {

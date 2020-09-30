@@ -1,10 +1,17 @@
 package main;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement
+@Entity
+@Table(name = "voluntario")
 public class Voluntario extends Persona {
 	//Atributos
+	
+	@Column(name = "areaActividades")
 	private String areaActividades;
 
 	//Metodo constructor

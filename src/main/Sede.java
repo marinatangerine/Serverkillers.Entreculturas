@@ -1,22 +1,47 @@
 package main;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlRootElement
+@XmlRootElement   
+@Entity
+@Table(name = "sede")
 public class Sede {
+	
 	// Atributos
+	
+	@Id
+	@Column(name = "idSede")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idSede;
+	
+	@Column(name = "ciudad")
 	private String ciudad;
+	
+	@Column(name = "direccion")
 	private String direccion;
+	
+	@Column (name = "telefono")
 	private String telefono;
+	
+	@Column (name = "email")
 	private String email;
-	private boolean central;
+	
+	@Column (name = "central")
+	private Boolean central;
 	
 	//Cardinalidad
-	
+	@Transient
 	private ArrayList <Persona> persona;
+	@Transient
 	private ArrayList <Proyecto> proyecto;
 	
 	//Metodo constructor
@@ -49,7 +74,7 @@ public class Sede {
 	public String getEmail() {
 		return email;
 	}
-	public boolean central() {
+	public boolean getCentral() {
 		return central;
 	}
 	
@@ -97,6 +122,6 @@ public class Sede {
 				". Dirección: " + direccion +
 				". Teléfono: " + telefono +
 				". Email: " + email + 
-				". Central: " + (central ? "Central" : "Delegación"));
+				". Central: " + ((central != null && central) ? "Central" : "Delegación"));
 	}
 }
