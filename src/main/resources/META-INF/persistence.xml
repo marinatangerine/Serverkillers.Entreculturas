@@ -6,16 +6,24 @@
 	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
 	<persistence-unit name="ong">
+	
+		<class>Sede</class>
+		<class>Persona</class>
+		<class>Voluntario</class>
+		<class>Proyecto</class>
+	
+	
 		<properties>
-		<!--  
-			<property name="javax.persistence.jdbc.driver" value="" />
-			<property name="javax.persistence.jdbc.url" value="" />
-			<property name="javax.persistence.jdbc.user" value="" />
+	
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ong" />
+			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="" /> 
 			
-			-->
+			
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.show.sql" value="true" />
 		</properties>
 	</persistence-unit>
 

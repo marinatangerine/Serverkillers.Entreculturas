@@ -1,5 +1,9 @@
 package main;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -7,19 +11,42 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @XmlRootElement
+@Entity
+@Table(name = "proyecto")
 public class Proyecto {
+	
 	//Atributos
+	
+	@Id
+	@Column (name = "codProyecto")
 	private int codProyecto;
+	
+	@Column (name = "nombre")
 	private String nombre;
+	
+	@Column (name = "lineaAccion")
 	private String lineaAccion;
+	
+	@Column (name = "subLinea")
 	private String subLinea;
+	
+	@Column (name = "pais")
 	private String pais;
+	
+	@Column (name = "localizacion")
 	private String localizacion;
+	
+	@Column (name = "fechaInicio")
 	private LocalDate fechaInicio;
+	
+	@Column (name = "fechaFin")
 	private LocalDate fechaFin;
+	
+	@Column (name = "acciones")
 	private String acciones;
 	
 	//Cardinalidad
+	@Column (name = "fk_sedeProyecto")
 	private int idSede;
 		
 	//Metodo constructor
