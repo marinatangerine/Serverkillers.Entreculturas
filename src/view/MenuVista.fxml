@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane fx:id="mostrarProyectos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="600.0" style="-fx-background-color: #143961; -fx-background-radius: 40;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="menu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #143961; -fx-background-radius: 40;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
    <effect>
       <DropShadow blurType="ONE_PASS_BOX" color="#485ca4" />
    </effect>
@@ -24,7 +23,7 @@
             <Font name="Impact" size="59.0" />
          </font>
       </Text>
-      <Button fx:id="crearPersona" layoutX="87.0" layoutY="191.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Crear una Persona">
+      <Button fx:id="crearPersona" layoutX="87.0" layoutY="191.0" mnemonicParsing="false" onAction="#crearNuevaPersona" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Crear una Persona">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
@@ -44,7 +43,7 @@
             <Font name="Impact" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="crearSede1" layoutX="87.0" layoutY="429.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Crear un Proyecto">
+      <Button fx:id="crearProyecto" layoutX="87.0" layoutY="429.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Crear un Proyecto">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
@@ -64,12 +63,12 @@
             <Font name="Impact" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="mostrarSedes1" layoutX="322.0" layoutY="429.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Mostrar  Proyectos">
+      <Button fx:id="mostrarProyectos" layoutX="322.0" layoutY="429.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Mostrar  Proyectos">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="salir" layoutX="213.0" layoutY="511.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff;" text="Salir">
+      <Button fx:id="salir" cancelButton="true" layoutX="213.0" layoutY="511.0" mnemonicParsing="false" onAction="#salir" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff;" text="Salir">
          <font>
             <Font name="Impact" size="18.0" />
          </font>

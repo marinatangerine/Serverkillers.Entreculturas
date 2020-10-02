@@ -1,8 +1,8 @@
 package dao;
 
-import main.Persona;
 import main.Proyecto;
 import main.Voluntario;
+import model.Persona;
 import main.Sede;
 /**Métodos que devuelve el DAO de cada una de las clases
  * Se incluye (comentado) el caso para utilizar una base de datos relacional

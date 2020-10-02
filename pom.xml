@@ -7,6 +7,14 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<resources>
+	        <resource>
+	            <directory>${basedir}/src</directory>
+	            <includes>
+	                <include>*/</include>
+	            </includes>
+	        </resource>
+	     </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

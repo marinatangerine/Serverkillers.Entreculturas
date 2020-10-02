@@ -9,6 +9,8 @@ import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 
+import model.Persona;
+
 //Test para comprobar si los objetos de la clase "Persona" se suman correctamente en su ArrayList
 
 public class PersonaTest {

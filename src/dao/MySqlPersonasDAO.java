@@ -14,7 +14,7 @@ import javax.persistence.Persistence;
 import java.util.ArrayList;
 import main.DatabaseUtil;
 import main.DuplicateEntityException;
-import main.Persona;
+import model.Persona;
 
 public class MySqlPersonasDAO implements DAO<Persona> {
 	

@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import main.DuplicateEntityException;
-import main.Persona;
+import model.Persona;
 
 /**Define el contenido del XMl Personas
  * Carga los datos anteriores del Xml (para poder comprobar información de ellos y mostrarlo)

@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.*;
+
+import model.Persona;
+
 import java.util.ArrayList;
 import java.util.List;
 
