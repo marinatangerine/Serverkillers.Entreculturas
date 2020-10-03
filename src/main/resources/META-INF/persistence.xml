@@ -7,10 +7,10 @@
 
 	<persistence-unit name="ong">
 	
-		<class>Sede</class>
-		<class>Persona</class>
-		<class>Voluntario</class>
-		<class>Proyecto</class>
+		<class>main.java.Sede</class>
+		<class>main.java.model.Persona</class>
+		<class>main.java.Voluntario</class>
+		<class>main.java.Proyecto</class>
 	
 	
 		<properties>

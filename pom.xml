@@ -9,9 +9,15 @@
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
 	        <resource>
-	            <directory>${basedir}/src</directory>
+	            <directory>${basedir}/src/main/resources</directory>
 	            <includes>
 	                <include>*/</include>
+	            </includes>
+	        </resource>
+			<resource>
+	            <directory>${basedir}/src/main/resources/META-INF</directory>
+	            <includes>
+	                <include>persistence.xml</include>
 	            </includes>
 	        </resource>
 	     </resources>

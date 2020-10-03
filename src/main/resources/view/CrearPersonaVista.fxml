@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.CrearPersonaController">
+   <children>
+      <AnchorPane id="menu" fx:id="crearPersona" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="600.0" style="-fx-background-color: #143961; -fx-background-radius: 40;">
+         <children>
+            <Text fx:id="entre" blendMode="SCREEN" fill="#fcfafa" layoutX="415.0" layoutY="544.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entre">
+               <font>
+                  <Font name="Impact" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#fff200" layoutX="466.0" layoutY="544.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culturas">
+               <font>
+                  <Font name="Impact" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#f8f8f8" layoutX="90.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca los datos de una nueva persona">
+               <font>
+                  <Font name="Impact" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="userName" layoutX="132.0" layoutY="119.0" />
+            <Text fill="WHITE" layoutX="23.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de Usuario">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="23.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <PasswordField fx:id="pass" layoutX="132.0" layoutY="164.0" />
+            <Text fill="WHITE" layoutX="31.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rol">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="27.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="27.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellidos">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="28.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirección">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="29.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teléfono">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="39.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="40.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sede">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="namePersona" layoutX="132.0" layoutY="256.0" />
+            <TextField fx:id="surname" layoutX="132.0" layoutY="298.0" />
+            <TextField fx:id="address" layoutX="132.0" layoutY="341.0" />
+            <TextField fx:id="phone" layoutX="132.0" layoutY="383.0" />
+            <TextField fx:id="email" layoutX="132.0" layoutY="426.0" />
+            <TableView layoutX="315.0" layoutY="144.0" prefHeight="282.0" prefWidth="261.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <Button fx:id="salir" layoutX="342.0" layoutY="521.0" mnemonicParsing="false" onAction="#inicio" style="-fx-background-color: #fff200;" text="Inicio">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="guardar" layoutX="132.0" layoutY="511.0" mnemonicParsing="false" onAction="#guardar" prefHeight="47.0" prefWidth="149.0" style="-fx-background-color: #fff;" text="Guardar">
+               <font>
+                  <Font name="Impact" size="18.0" />
+               </font>
+            </Button>
+            <ChoiceBox fx:id="rol" layoutX="132.0" layoutY="211.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="sede" layoutX="132.0" layoutY="464.0" prefWidth="150.0" />
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
