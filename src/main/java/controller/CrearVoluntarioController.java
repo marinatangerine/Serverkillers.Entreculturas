@@ -23,18 +23,19 @@ import javafx.stage.Stage;
 import main.java.main.DuplicateEntityException;
 import main.java.model.Persona;
 import main.java.model.Sede;
+import main.java.model.Voluntario;
 import main.java.dao.DAO;
 import main.java.dao.DAOFactory;
 import main.java.dao.MySqlPersonasDAO;
 import main.java.dao.MySqlSedesDAO;
+import main.java.dao.MySqlVoluntariosDAO;
 
-public class CrearPersonaController implements Initializable {
+public class CrearVoluntarioController implements Initializable {
 	
 	private static DAOFactory MySqlDAOFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 	private static DAO<Persona> mysqlpersonasDAO = (MySqlPersonasDAO) MySqlDAOFactory.getPersonasDAO();
 	private static DAO<Sede> mysqlsedesDAO = (MySqlSedesDAO) MySqlDAOFactory.getSedesDAO();
-	
-	
+	private static DAO<Voluntario> mysqlvoluntariosDAO = (MySqlVoluntariosDAO) MySqlDAOFactory.getVoluntariosDAO();
 	
 	ObservableList<String> rolList = FXCollections.observableArrayList("Administrador", "Usuario");
 	@FXML
@@ -73,6 +74,9 @@ public class CrearPersonaController implements Initializable {
 	@FXML 
 	private ChoiceBox sede;
 	
+	@FXML
+	private TextField areaActividades;
+	
 	
 	
 
@@ -88,6 +92,9 @@ public class CrearPersonaController implements Initializable {
 		sedeList = FXCollections.observableArrayList(idSedes);
 		sede.setItems(sedeList);
 		
+		
+		
+		
 	}
 	
 	
@@ -102,9 +109,10 @@ public class CrearPersonaController implements Initializable {
 		String email = this.email.getText();
 		Boolean admin = this.rol.getSelectionModel().getSelectedItem() == "Administrador";
 		Integer idSede = Integer.parseInt(this.sede.getSelectionModel().getSelectedItem().toString());
+		String areaActividades = this.areaActividades.getText();
 		
-		Persona persona = new Persona(username, pass, admin, namePersona, surname, address, phone, email, idSede);
-		mysqlpersonasDAO.add(persona);
+		Voluntario voluntario = new Voluntario(username, pass, admin, namePersona, surname, address, phone, email, idSede, areaActividades);
+		mysqlvoluntariosDAO.add(voluntario);
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MenuVista.fxml"));
 		Parent root = loader.load();

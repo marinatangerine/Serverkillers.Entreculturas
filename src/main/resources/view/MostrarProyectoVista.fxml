@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.MostrarProyectoController">
+   <children>
+      <AnchorPane layoutX="7.0" layoutY="-7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="600.0" style="-fx-background-color: #143961; -fx-background-radius: 40;">
+         <children>
+            <Text fill="#fff200" layoutX="480.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culturas">
+               <font>
+                  <Font name="Impact" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#f8f7f7" layoutX="429.0" layoutY="553.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entre">
+               <font>
+                  <Font name="Impact" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#f8f7f7" layoutX="162.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos de los proyectos:">
+               <font>
+                  <Font name="Impact" size="24.0" />
+               </font>
+            </Text>
+            <Button fx:id="inicio" layoutX="276.0" layoutY="542.0" mnemonicParsing="false" onAction="#inicio" style="-fx-background-color: #fff200;" text="Inicio">
+               <font>
+                  <Font name="Impact" size="18.0" />
+               </font>
+            </Button>
+            <TableView fx:id="tablaProyecto" layoutX="6.0" layoutY="131.0" prefHeight="318.0" prefWidth="588.0">
+              <columns>
+                <TableColumn fx:id="columnId" prefWidth="33.0" text="Id" />
+                <TableColumn fx:id="columnNombre" prefWidth="54.0" text="Nombre" />
+                  <TableColumn fx:id="columnLineaAccion" prefWidth="77.0" text="Linea Acción" />
+                  <TableColumn fx:id="columnSublinea" prefWidth="60.0" text="Sublinea" />
+                  <TableColumn fx:id="columnPais" prefWidth="40.0" text="País" />
+                  <TableColumn fx:id="columnLocalizacion" prefWidth="75.0" text="Localización" />
+                  <TableColumn fx:id="columnFechaInicio" prefWidth="72.0" text="Fecha Inicio" />
+                  <TableColumn fx:id="columnFechaFin" prefWidth="78.0" text="Fecha Fin" />
+                  <TableColumn fx:id="columnAcciones" prefWidth="47.0" text="Acciones" />
+                  <TableColumn fx:id="columnSede" prefWidth="35.0" text="sede" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,4 +1,4 @@
-package main.java.main;
+package main.java.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.*;
-
-import main.java.model.Persona;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +52,14 @@ public class Sede {
 	
 	public Sede (int pIdSede, String pCiudad, String pDireccion, String pTelefono, String pEmail, boolean pCentral) {
 		this.idSede = pIdSede;
+		this.ciudad = pCiudad;
+		this.direccion = pDireccion;
+		this.telefono = pTelefono;
+		this.email = pEmail;
+		this.central = pCentral;
+	}
+	
+	public Sede (String pCiudad, String pDireccion, String pTelefono, String pEmail, boolean pCentral) {
 		this.ciudad = pCiudad;
 		this.direccion = pDireccion;
 		this.telefono = pTelefono;

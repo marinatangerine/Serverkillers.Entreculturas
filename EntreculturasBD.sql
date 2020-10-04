@@ -6,7 +6,7 @@ ciudad varchar(100),
 direccion varchar(255),
 telefono varchar(50),
 email varchar (50),
-central bool,
+central bool not null,
 
 primary key (idSede)
 );

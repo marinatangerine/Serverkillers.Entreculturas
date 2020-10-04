@@ -1,4 +1,4 @@
-package main.java.main;
+package main.java.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,6 +65,19 @@ public class Proyecto {
 		this.fechaInicio = pFechaInicio;
 		this.fechaFin = pFechaFin;
 		this.acciones = pAcciones;
+	}
+	
+	public Proyecto (String pNombre, String pLineaAccion, String pSubLinea, String pPais, 
+			String pLocalizacion, LocalDate pFechaInicio,LocalDate pFechaFin, String pAcciones, int pIdSede) {
+		this.nombre = pNombre;
+		this.lineaAccion = pLineaAccion;
+		this.subLinea = pSubLinea;
+		this.pais = pPais;
+		this.localizacion = pLocalizacion;
+		this.fechaInicio = pFechaInicio;
+		this.fechaFin = pFechaFin;
+		this.acciones = pAcciones;
+		this.idSede = pIdSede;
 	}
 	
 	//Metodos get

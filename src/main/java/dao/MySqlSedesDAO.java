@@ -14,7 +14,7 @@ import javax.persistence.Persistence;
 import java.util.ArrayList;
 import main.java.main.DatabaseUtil;
 import main.java.main.DuplicateEntityException;
-import main.java.main.Sede;
+import main.java.model.Sede;
 
 public class MySqlSedesDAO implements DAO<Sede> {
 	

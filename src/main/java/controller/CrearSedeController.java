@@ -28,38 +28,27 @@ import main.java.dao.DAOFactory;
 import main.java.dao.MySqlPersonasDAO;
 import main.java.dao.MySqlSedesDAO;
 
-public class CrearPersonaController implements Initializable {
+public class CrearSedeController implements Initializable {
 	
 	private static DAOFactory MySqlDAOFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-	private static DAO<Persona> mysqlpersonasDAO = (MySqlPersonasDAO) MySqlDAOFactory.getPersonasDAO();
 	private static DAO<Sede> mysqlsedesDAO = (MySqlSedesDAO) MySqlDAOFactory.getSedesDAO();
 	
 	
 	
-	ObservableList<String> rolList = FXCollections.observableArrayList("Administrador", "Usuario");
-	@FXML
-	ObservableList<Integer> sedeList;
+	ObservableList<String> tipoList = FXCollections.observableArrayList("Central", "Delegación");
+	
 	
 	@FXML
-	private TextField userName;
+	private TextField ciudadede;
 	
 	@FXML
-	private PasswordField pass;
+	private TextField direccionSede;
 	
 	@FXML
-	private TextField namePersona;
+	private TextField phoneSede;
 	
 	@FXML
-	private TextField surname;
-	
-	@FXML
-	private TextField address;
-	
-	@FXML
-	private TextField phone;
-	
-	@FXML
-	private TextField email;
+	private TextField emailSede;
 	
 	@FXML 
 	private Button inicio;
@@ -68,43 +57,26 @@ public class CrearPersonaController implements Initializable {
 	private Button guardar;
 	
 	@FXML
-	private ChoiceBox rol;
-	
-	@FXML 
-	private ChoiceBox sede;
+	private ChoiceBox tipoSede;
 	
 	
-	
-
-	
-	
-
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		rol.setItems(rolList);
-		mysqlsedesDAO.loadData();
-		List<Integer> idSedes = mysqlsedesDAO.list().stream().map(Sede::getIdSede).collect(Collectors.toList());
-		sedeList = FXCollections.observableArrayList(idSedes);
-		sede.setItems(sedeList);
-		
+		tipoSede.setItems(tipoList);
 	}
 	
 	
 	@FXML
 	private void guardar(ActionEvent event) throws DuplicateEntityException, IOException {
-		String username = this.userName.getText();
-		String pass = this.pass.getText();
-		String namePersona = this.namePersona.getText();
-		String surname = this.surname.getText();
-		String address = this.address.getText();
-		String phone = this.phone.getText();
-		String email = this.email.getText();
-		Boolean admin = this.rol.getSelectionModel().getSelectedItem() == "Administrador";
-		Integer idSede = Integer.parseInt(this.sede.getSelectionModel().getSelectedItem().toString());
+		String ciudad = this.ciudadede.getText();
+		String direccion = this.direccionSede.getText();
+		String phone = this.phoneSede.getText();
+		String email = this.emailSede.getText();
+		Boolean central = this.tipoSede.getSelectionModel().getSelectedItem() == "Central";
 		
-		Persona persona = new Persona(username, pass, admin, namePersona, surname, address, phone, email, idSede);
-		mysqlpersonasDAO.add(persona);
+		Sede sede = new Sede(ciudad, direccion, phone, email, central);
+		mysqlsedesDAO.add(sede);
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MenuVista.fxml"));
 		Parent root = loader.load();

@@ -46,28 +46,5 @@ public class Startup extends Application {
 	    Application.launch(args);
 	  }
  
-//    @Override
-//    public void start(Stage primaryStage) {
-// 
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("controller/MenuVista.fxml"));
-//            loader.setLocation(Main.class.getResource("MenuVista.fxml"));
-//            // Cargo la ventana
-//            Pane ventana = (Pane) loader.load();
-// 
-//            // Cargo el scene
-//            Scene scene = new Scene(ventana);
-// 
-//            // Seteo la scene y la muestro
-//            primaryStage.setScene(scene);
-//            primaryStage.show();
-//        } catch (IOException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-// 
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
  
 }

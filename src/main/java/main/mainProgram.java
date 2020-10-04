@@ -15,6 +15,9 @@ import main.java.dao.MySqlProyectosDAO;
 import main.java.dao.MySqlSedesDAO;
 import main.java.dao.MySqlVoluntariosDAO;
 import main.java.model.Persona;
+import main.java.model.Proyecto;
+import main.java.model.Sede;
+import main.java.model.Voluntario;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

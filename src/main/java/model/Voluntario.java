@@ -1,11 +1,9 @@
-package main.java.main;
+package main.java.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.*;
-
-import main.java.model.Persona;
 
 @XmlRootElement
 @Entity
@@ -27,6 +25,12 @@ public class Voluntario extends Persona {
 	public Voluntario (int pPersonId, String pUserName, String pPass, boolean admin, String pName, 
 			String pSurname, String pAddress,String pPhone, String pEmail, int pIdSede, String areaActividades) {
 		super (pPersonId, pUserName, pPass, admin, pName, pSurname, pAddress, pPhone, pEmail, pIdSede);
+		this.areaActividades = areaActividades;
+	}
+	
+	public Voluntario (String pUserName, String pPass, boolean admin, String pName, 
+			String pSurname, String pAddress,String pPhone, String pEmail, int pIdSede, String areaActividades) {
+		super (pUserName, pPass, admin, pName, pSurname, pAddress, pPhone, pEmail, pIdSede);
 		this.areaActividades = areaActividades;
 	}
 	

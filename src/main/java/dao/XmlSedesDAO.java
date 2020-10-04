@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import main.java.main.DuplicateEntityException;
-import main.java.main.Sede;
+import main.java.model.Sede;
 
 /** Carga los datos anteriores del Xml (para poder comprobar información de ellos y mostrarlo)
 * Lista los datos de las personas guardadas

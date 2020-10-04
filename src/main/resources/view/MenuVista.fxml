@@ -33,37 +33,37 @@
             <Font name="Impact" size="24.0" />
          </font>
       </Text>
-      <Button fx:id="crearVoluntario" layoutX="87.0" layoutY="268.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Crear un Voluntario">
+      <Button fx:id="crearVoluntario" layoutX="87.0" layoutY="268.0" mnemonicParsing="false" onAction="#crearNuevoVoluntario" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Crear un Voluntario">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="crearSede" layoutX="87.0" layoutY="349.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Crear una Sede">
+      <Button fx:id="crearSede" layoutX="87.0" layoutY="349.0" mnemonicParsing="false" onAction="#crearSede" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Crear una Sede">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="crearProyecto" layoutX="87.0" layoutY="429.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Crear un Proyecto">
+      <Button fx:id="crearProyecto" layoutX="87.0" layoutY="429.0" mnemonicParsing="false" onAction="#crearProyecto" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Crear un Proyecto">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="mostrarPersonas" layoutX="322.0" layoutY="191.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Mostrar Personas">
+      <Button fx:id="mostrarPersonas" layoutX="322.0" layoutY="191.0" mnemonicParsing="false" onAction="#mostrarPersonas" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Mostrar Personas">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="mostrarVoluntarios" layoutX="322.0" layoutY="268.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Mostrar Voluntarios">
+      <Button fx:id="mostrarVoluntarios" layoutX="322.0" layoutY="268.0" mnemonicParsing="false" onAction="#mostrarVoluntarios" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Mostrar Voluntarios">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="mostrarSedes" layoutX="322.0" layoutY="349.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Mostrar Sedes">
+      <Button fx:id="mostrarSedes" layoutX="322.0" layoutY="349.0" mnemonicParsing="false" onAction="#mostrarSedes" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Mostrar Sedes">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="mostrarProyectos" layoutX="322.0" layoutY="429.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Mostrar  Proyectos">
+      <Button fx:id="mostrarProyectos" layoutX="322.0" layoutY="429.0" mnemonicParsing="false" onAction="#mostrarProyectos" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #fff200;" text="Mostrar  Proyectos">
          <font>
             <Font name="Impact" size="18.0" />
          </font>

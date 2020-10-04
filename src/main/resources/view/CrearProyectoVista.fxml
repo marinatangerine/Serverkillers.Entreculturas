@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.CrearProyectoController">
+   <children>
+      <AnchorPane id="menu" fx:id="crearPersona" layoutY="-7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="600.0" style="-fx-background-color: #143961; -fx-background-radius: 40;">
+         <children>
+            <Text fx:id="entre" blendMode="SCREEN" fill="#fcfafa" layoutX="415.0" layoutY="544.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entre">
+               <font>
+                  <Font name="Impact" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#fff200" layoutX="466.0" layoutY="544.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culturas">
+               <font>
+                  <Font name="Impact" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#f8f8f8" layoutX="90.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca los datos de un nuevo proyecto">
+               <font>
+                  <Font name="Impact" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nombreProyecto" layoutX="148.0" layoutY="139.0" />
+            <Text fill="WHITE" layoutX="21.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de Proyecto">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="34.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Linea de acción">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="24.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sublinea de acción">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="78.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="País">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="42.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Localización">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="44.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha inicio">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="74.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sede">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="lineaAccion" layoutX="148.0" layoutY="196.0" />
+            <TextField fx:id="sublinea" layoutX="148.0" layoutY="251.0" />
+            <TextField fx:id="pais" layoutX="148.0" layoutY="342.0" />
+            <TextField fx:id="localizacion" layoutX="148.0" layoutY="392.0" />
+            <Button fx:id="salir" layoutX="384.0" layoutY="298.0" mnemonicParsing="false" onAction="#inicio" prefHeight="47.0" prefWidth="149.0" style="-fx-background-color: #fff200;" text="Inicio">
+               <font>
+                  <Font name="Impact" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="guardar" layoutX="384.0" layoutY="208.0" mnemonicParsing="false" onAction="#guardar" prefHeight="47.0" prefWidth="149.0" style="-fx-background-color: #fff;" text="Guardar">
+               <font>
+                  <Font name="Impact" size="18.0" />
+               </font>
+            </Button>
+            <ChoiceBox fx:id="sede" layoutX="150.0" layoutY="522.0" prefWidth="150.0" />
+            <DatePicker fx:id="fechaInicio" layoutX="148.0" layoutY="435.0" />
+            <Text fill="WHITE" layoutX="53.0" layoutY="495.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha fin">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <DatePicker fx:id="fechaFin" layoutX="148.0" layoutY="477.0" />
+            <Text fill="WHITE" layoutX="63.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acciones">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="acciones" layoutX="148.0" layoutY="300.0" />
+         </children></AnchorPane>
+   </children>
+</AnchorPane>

@@ -14,7 +14,7 @@ import javax.persistence.Persistence;
 import java.util.ArrayList;
 import main.java.main.DatabaseUtil;
 import main.java.main.DuplicateEntityException;
-import main.java.main.Voluntario;
+import main.java.model.Voluntario;
 
 public class MySqlVoluntariosDAO implements DAO<Voluntario> {
 

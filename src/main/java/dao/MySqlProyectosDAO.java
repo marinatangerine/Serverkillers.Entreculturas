@@ -15,8 +15,7 @@ import javax.persistence.Persistence;
 import java.util.ArrayList;
 import main.java.main.DatabaseUtil;
 import main.java.main.DuplicateEntityException;
-
-import main.java.main.Proyecto;
+import main.java.model.Proyecto;
 
 public class MySqlProyectosDAO implements DAO<Proyecto>{
 

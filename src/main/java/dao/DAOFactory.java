@@ -1,9 +1,9 @@
 package main.java.dao;
 
-import main.java.main.Proyecto;
-import main.java.main.Voluntario;
 import main.java.model.Persona;
-import main.java.main.Sede;
+import main.java.model.Proyecto;
+import main.java.model.Sede;
+import main.java.model.Voluntario;
 /**Métodos que devuelve el DAO de cada una de las clases
  * Se incluye (comentado) el caso para utilizar una base de datos relacional
  * @versión 1.0 23/05/2020

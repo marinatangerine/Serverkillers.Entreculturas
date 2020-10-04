@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import main.java.model.Voluntario;
+
 public class VoluntarioTest {
 
 	//Test para comprobar si los parametros añadidos al constructor lo inicializan correctamente
