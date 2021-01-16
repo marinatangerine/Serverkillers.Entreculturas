@@ -26,8 +26,8 @@ P5 - Programación orientada a objetos con acceso a base de datos
 
 ## Style 
 
-!(https://i.ibb.co/26S41Y6/chrome-Yg-Y6-OU94-Cr.png)
-!(https://i.ibb.co/f8t5Ym2/chrome-Ek2-ZBZ1-Uwe.png)
+!(https://i.ibb.co/26S41Y6/chrome-Yg-Y6-OU94-Cr.png)  
+!(https://i.ibb.co/f8t5Ym2/chrome-Ek2-ZBZ1-Uwe.png)  
 
 ## Contributing 📄
 
