@@ -22,6 +22,7 @@ P5 - Programación orientada a objetos con acceso a base de datos
 
 * **Marina Suárez** 
 * **Eric Ramos** 
+* **Melisa Martins** 
 
 ## Style 
 
