@@ -1,4 +1,4 @@
-# Proyecto 5 - Aplicación de escritorio basada en Java que se para los equipos de las delegaciones y en la central de la ONG "Entreculturas"
+### Proyecto 5 - Aplicación de escritorio basada en Java que se para los equipos de las delegaciones y en la central de la ONG "Entreculturas"
 
 P5 - Programación orientada a objetos con acceso a base de datos
 
